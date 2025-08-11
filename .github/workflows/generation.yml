@@ -1,0 +1,219 @@
+name: APIGenerator CI/CD Pipeline
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1 * * 6' # Every Saturday at 1 AM UTC
+
+jobs:
+  build-and-run:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout main repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup .NET (multiple versions)
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          6.0.x
+          7.0.x
+          8.0.x
+    
+    - name: Create Repositories directory
+      run: mkdir Repositories
+    
+    - name: Read and clone repositories
+      run: |
+        # Check if repos file exists
+        if (!(Test-Path "APIGenerator\APIGenerator\Repos.txt")) {
+          Write-Error "Error: Repos.txt not found at APIGenerator\APIGenerator\Repos.txt"
+          exit 1
+        }
+        
+        # Read repos and clone them
+        Get-Content "APIGenerator\APIGenerator\Repos.txt" | ForEach-Object {
+          $repo_url = $_.Trim()
+          
+          # Skip empty lines and comments
+          if ([string]::IsNullOrWhiteSpace($repo_url) -or $repo_url.StartsWith("#")) {
+            return
+          }
+          
+          # Extract repo name from URL
+          $repo_name = [System.IO.Path]::GetFileNameWithoutExtension($repo_url)
+          if ($repo_name.EndsWith(".git")) {
+            $repo_name = $repo_name.Substring(0, $repo_name.Length - 4)
+          }
+          
+          Write-Host "Processing repository: $repo_name"
+          
+          # Clone repository
+          try {
+            git clone $repo_url "Repositories\$repo_name"
+            Write-Host "Successfully cloned $repo_name"
+            
+            # Check if .sln file exists in base folder
+            $sln_files = Get-ChildItem "Repositories\$repo_name" -Filter "*.sln" -File
+            if ($sln_files.Count -gt 0) {
+              Write-Host "✓ Found .sln file in $repo_name - keeping repository"
+              $repo_name | Add-Content "valid_repos.txt" -Encoding UTF8
+            } else {
+              Write-Host "✗ No .sln file found in base folder of $repo_name - removing repository"
+              Remove-Item "Repositories\$repo_name" -Recurse -Force
+            }
+          } catch {
+            Write-Host "Failed to clone $repo_name"
+          }
+        }
+        
+        # Show summary
+        if (Test-Path "valid_repos.txt") {
+          Write-Host "Valid repositories to compile:"
+          Get-Content "valid_repos.txt"
+        } else {
+          Write-Host "No valid repositories found with .sln files"
+        }
+      shell: pwsh
+    
+    - name: Compile repositories in order
+      run: |
+        if (!(Test-Path "valid_repos.txt")) {
+          Write-Host "No valid repositories to compile"
+          exit 0
+        }
+        
+        # Compile each valid repository
+        Get-Content "valid_repos.txt" | ForEach-Object {
+          $repo_name = $_.Trim()
+          Write-Host "Compiling repository: $repo_name"
+          
+          Push-Location "Repositories\$repo_name"
+          
+          try {
+            # Find and restore packages for all .sln files
+            Get-ChildItem -Filter "*.sln" -File | ForEach-Object {
+              Write-Host "Restoring packages for $($_.Name)"
+              dotnet restore $_.Name
+            }
+            
+            # Build all .sln files in the repository
+            Get-ChildItem -Filter "*.sln" -File | ForEach-Object {
+              Write-Host "Building $($_.Name)"
+              $result = dotnet build $_.Name --configuration Release --no-restore
+              if ($LASTEXITCODE -eq 0) {
+                Write-Host "✓ Successfully built $($_.Name)"
+              } else {
+                Write-Error "✗ Failed to build $($_.Name)"
+                exit 1
+              }
+            }
+          } finally {
+            Pop-Location
+          }
+        }
+      shell: pwsh
+    
+    - name: Compile APIGenerator solution
+      run: |
+        Write-Host "Compiling APIGenerator.sln"
+        
+        # Check if the solution file exists
+        if (!(Test-Path "APIGenerator\APIGenerator.sln")) {
+          Write-Error "Error: APIGenerator.sln not found at APIGenerator\APIGenerator.sln"
+          exit 1
+        }
+        
+        # Restore packages
+        Write-Host "Restoring packages for APIGenerator.sln"
+        dotnet restore "APIGenerator\APIGenerator.sln"
+        
+        # Build the solution
+        Write-Host "Building APIGenerator.sln"
+        dotnet build "APIGenerator\APIGenerator.sln" --configuration Release --no-restore
+      shell: pwsh
+    
+    - name: Find and run APIGenerator executable
+      run: |
+        Write-Host "Looking for APIGenerator executable..."
+        
+        # Look for the executable in common build output locations
+        $possible_paths = @(
+          "APIGenerator\APIGenerator\bin\Release\net*\APIGenerator.exe",
+          "APIGenerator\bin\Release\net*\APIGenerator.exe"
+        )
+        
+        $exe_path = $null
+        foreach ($pattern in $possible_paths) {
+          $found_files = Get-ChildItem -Path $pattern -ErrorAction SilentlyContinue
+          if ($found_files) {
+            $exe_path = $found_files[0].FullName
+            break
+          }
+        }
+        
+        # If no .exe found, try using dotnet run
+        if ([string]::IsNullOrEmpty($exe_path)) {
+          Write-Host "No executable found, trying dotnet run..."
+          
+          if (Test-Path "APIGenerator\APIGenerator.csproj") {
+            Push-Location "APIGenerator"
+            dotnet run --project APIGenerator.csproj --configuration Release
+            Pop-Location
+          } elseif (Test-Path "APIGenerator\APIGenerator\APIGenerator.csproj") {
+            Push-Location "APIGenerator"
+            dotnet run --project APIGenerator\APIGenerator.csproj --configuration Release
+            Pop-Location
+          } else {
+            Write-Error "Could not find APIGenerator.csproj file"
+            exit 1
+          }
+        } else {
+          Write-Host "Found executable at: $exe_path"
+          Write-Host "Running APIGenerator..."
+          
+          # Run the executable
+          & $exe_path
+        }
+      shell: pwsh
+    
+    - name: Upload build artifacts (optional)
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: build-logs
+        path: |
+          **/bin/
+          **/obj/
+          valid_repos.txt
+        retention-days: 7
+    
+    - name: Commit and push changes
+      run: |
+        # Configure git
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        # Create and checkout new branch
+        $branch_name = "github-actions-test"
+        git checkout -b $branch_name
+        
+        # Add all changes (including new files and directories)
+        git add -A
+        
+        # Check if there are any changes to commit
+        $changes = git status --porcelain
+        if ($changes) {
+          Write-Host "Changes detected, committing..."
+          git commit -m "APIGenerator workflow results - $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+          
+          # Push the branch
+          git push origin $branch_name
+          Write-Host "Successfully pushed changes to branch: $branch_name"
+        } else {
+          Write-Host "No changes to commit"
+        }
+      shell: pwsh
