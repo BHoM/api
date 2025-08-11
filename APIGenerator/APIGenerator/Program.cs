@@ -26,8 +26,9 @@ foreach (Assembly assembly in oMAssemblies)
     }
 }
 
+string rootFolder = Path.Combine(Environment.CurrentDirectory.Split("APIGenerator")[0]); // Assumes the git folder is in the parent directory of the APIGenerator folder
 
-TypeToMarkdown.SetupAssemblyFolders(@"C:\BHoMBot\Github", oMAssemblies);
+TypeToMarkdown.SetupAssemblyFolders(rootFolder, oMAssemblies);
 
 foreach (Assembly assembly in oMAssemblies)
 {
@@ -37,7 +38,7 @@ foreach (Assembly assembly in oMAssemblies)
     {
         if (!(type.IsAbstract && type.IsSealed) && (type.IsEnum || typeof(IObject).IsAssignableFrom(type)))
         {
-            TypeToMarkdown.WriteTypeToMarkdown(@"C:\Github\api\docs\", type, methods, genericMethods);
+            TypeToMarkdown.WriteTypeToMarkdown(Path.Combine(rootFolder, "docs"), type, methods, genericMethods);
         }
     }
 }

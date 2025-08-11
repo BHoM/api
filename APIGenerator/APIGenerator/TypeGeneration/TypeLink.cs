@@ -128,13 +128,16 @@ namespace SchemaDocumentationGenerator
 
         /***************************************************/
 
-        public static void SetupAssemblyFolders(string gitFolderPath, List<Assembly> assemblies)
+        public static void SetupAssemblyFolders(string rootFolder, List<Assembly> assemblies)
         {
+
+            string gitFolderPath = Path.Combine(rootFolder, "Repositories");
+
             List<Assembly> assembliesCopy = assemblies.ToList();
 
             foreach (string repo in Directory.GetDirectories(gitFolderPath))
             {
-                if (repo.Contains("BHoM_JSONSchema"))
+                if (repo.Contains("BHoM_JSONSchema"))   // Skip the JSON Schema repo as it is not an oM repo
                     continue;
                 foreach (string projFolder in Directory.GetDirectories(repo))
                 {

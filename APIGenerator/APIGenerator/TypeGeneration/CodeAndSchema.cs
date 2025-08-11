@@ -28,9 +28,6 @@ namespace SchemaDocumentationGenerator
                 markdown += jsonSchema;
 
             return markdown;
-
-
-
         }
 
         /***************************************************/
