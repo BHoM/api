@@ -102,13 +102,21 @@ jobs:
             
             # Build all .sln files in the repository
             Get-ChildItem -Filter "*.sln" -File | ForEach-Object {
-              Write-Host "Building $($_.Name)"
+              Write-Host "Building $($_.Name) with dotnet build"
               $result = dotnet build $_.Name --configuration Release --no-restore
               if ($LASTEXITCODE -eq 0) {
-                Write-Host "✓ Successfully built $($_.Name)"
+                Write-Host "✓ Successfully built $($_.Name) with dotnet build"
               } else {
-                Write-Error "✗ Failed to build $($_.Name)"
-                exit 1
+                Write-Host "✗ dotnet build failed for $($_.Name), trying MSBuild..."
+                
+                # Try with MSBuild as fallback
+                $msbuildResult = msbuild $_.Name /p:Configuration=Release /p:Platform="Any CPU" /m
+                if ($LASTEXITCODE -eq 0) {
+                  Write-Host "✓ Successfully built $($_.Name) with MSBuild"
+                } else {
+                  Write-Error "✗ Both dotnet build and MSBuild failed for $($_.Name)"
+                  exit 1
+                }
               }
             }
           } finally {
@@ -132,8 +140,20 @@ jobs:
         dotnet restore "APIGenerator\APIGenerator.sln"
         
         # Build the solution
-        Write-Host "Building APIGenerator.sln"
-        dotnet build "APIGenerator\APIGenerator.sln" --configuration Release --no-restore
+        Write-Host "Building APIGenerator.sln with dotnet build"
+        $result = dotnet build "APIGenerator\APIGenerator.sln" --configuration Release --no-restore
+        if ($LASTEXITCODE -ne 0) {
+          Write-Host "dotnet build failed, trying MSBuild..."
+          $msbuildResult = msbuild "APIGenerator\APIGenerator.sln" /p:Configuration=Release /p:Platform="Any CPU" /m
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Both dotnet build and MSBuild failed for APIGenerator.sln"
+            exit 1
+          } else {
+            Write-Host "✓ Successfully built APIGenerator.sln with MSBuild"
+          }
+        } else {
+          Write-Host "✓ Successfully built APIGenerator.sln with dotnet build"
+        }
       shell: pwsh
     
     - name: Find and run APIGenerator executable
