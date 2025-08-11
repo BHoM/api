@@ -18,10 +18,10 @@ jobs:
     - name: Setup .NET (multiple versions)
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: |
-          6.0.x
-          7.0.x
-          8.0.x
+        dotnet-version: '8.0.x'
+    
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v2
     
     - name: Create Repositories directory
       run: mkdir Repositories
