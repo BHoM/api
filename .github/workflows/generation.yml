@@ -744,7 +744,14 @@ jobs:
           git status --porcelain | ForEach-Object { Write-Host "   $_" }
           
           # Commit with detailed message
-          $commitMessage = "APIGenerator workflow results - $timestamp`n`n- Generated API documentation from latest repository builds`n- Workflow run: ${{ github.run_number }}`n- Triggered by: ${{ github.event_name }}`n- Repository count: Built from multiple repositories in parallel"
+          $commitMessage = @"
+APIGenerator workflow results - $timestamp
+
+- Generated API documentation from latest repository builds
+- Workflow run: ${{ github.run_number }}
+- Triggered by: ${{ github.event_name }}
+- Repository count: Built from multiple repositories in parallel
+"@
           
           git commit -m $commitMessage
           Write-Host "✅ Committed changes successfully"
@@ -786,13 +793,39 @@ jobs:
           
           if ($existingPr -and $existingPr -ne "null" -and $existingPr -ne "") {
             Write-Host "📝 PR already exists (#$existingPr), adding update comment..."
-            $prComment = "🤖 **Automated API Documentation Update**`n`n📅 **Updated:** $timestamp`n🔢 **Workflow Run:** #${{ github.run_number }}`n🚀 **Trigger:** ${{ github.event_name }}`n`nThe API documentation has been regenerated from the latest repository builds and pushed to this branch."
+            $prComment = @"
+🤖 **Automated API Documentation Update**
+
+📅 **Updated:** $timestamp  
+🔢 **Workflow Run:** #${{ github.run_number }}  
+🚀 **Trigger:** ${{ github.event_name }}  
+
+The API documentation has been regenerated from the latest repository builds and pushed to this branch.
+"@
             gh pr comment $existingPr --body $prComment
             Write-Host "✅ Comment added to existing PR #$existingPr"
           } else {
             Write-Host "📝 Creating new pull request..."
             $prTitle = "🤖 API Documentation Updates - $timestamp"
-            $prBody = "## 🤖 Automated API Documentation Updates`n`nThis pull request contains automatically generated API documentation updates.`n`n### 📋 Details`n- **Generated:** $timestamp`n- **Workflow Run:** #${{ github.run_number }}`n- **Triggered by:** ${{ github.event_name }}`n- **Branch:** $branch_name`n`n### 🔄 What's Updated`n- API documentation regenerated from latest repository builds`n- Documentation processed with dependency-aware sequential building`n- All repositories with .sln files were built and processed`n`n### ✅ Ready for Review`nThis PR is ready for review and can be merged when approved."
+            $prBody = @"
+## 🤖 Automated API Documentation Updates
+
+This pull request contains automatically generated API documentation updates.
+
+### 📋 Details
+- **Generated:** $timestamp
+- **Workflow Run:** #${{ github.run_number }}
+- **Triggered by:** ${{ github.event_name }}
+- **Branch:** ``$branch_name``
+
+### 🔄 What's Updated
+- API documentation regenerated from latest repository builds
+- Documentation processed in parallel for improved performance
+- All repositories with .sln files were built and processed
+
+### ✅ Ready for Review
+This PR is ready for review and can be merged when approved.
+"@
             
             gh pr create --title $prTitle --body $prBody --head $branch_name --base main
             Write-Host "✅ Pull request created successfully"
