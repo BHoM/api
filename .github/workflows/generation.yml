@@ -22,13 +22,13 @@ jobs:
         TARGET_BRANCH: ${{ env.TARGET_BRANCH }}
         FALLBACK_BRANCH: ${{ env.FALLBACK_BRANCH }}
       run: |
-        set -euo pipefail
-        REPO="github.com/${GITHUB_REPOSITORY}"
-        if git ls-remote --heads "https://x-access-token:${GITHUB_TOKEN}@${REPO}" "${TARGET_BRANCH}" | grep -q "refs/heads/${TARGET_BRANCH}"; then
-          echo "branch=${TARGET_BRANCH}" >> "$GITHUB_OUTPUT"
-        else
-          echo "branch=${FALLBACK_BRANCH}" >> "$GITHUB_OUTPUT"
-        fi
+        $REPO = "github.com/$env:GITHUB_REPOSITORY"
+        $targetBranchExists = git ls-remote --heads "https://x-access-token:$env:GITHUB_TOKEN@$REPO" $env:TARGET_BRANCH
+        if ($targetBranchExists) {
+          "branch=$env:TARGET_BRANCH" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        } else {
+          "branch=$env:FALLBACK_BRANCH" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        }
         
     - name: Checkout main repository
       uses: actions/checkout@v4
