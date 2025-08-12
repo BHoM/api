@@ -2,39 +2,23 @@ name: APIGenerator CI/CD Pipeline
 
 on:
   workflow_dispatch:
-    inputs:
-      target_branch:
-        description: 'Target branch for API updates'
-        required: false
-        default: 'automatic-api-updates'
-      skip_cache:
-        description: 'Skip cache and force rebuild'
-        required: false
-        default: false
-        type: boolean
   schedule:
     - cron: '0 1 * * 0' # Every Sunday at 1 AM UTC
     
 permissions:
   contents: write
   pull-requests: write
-  actions: read
 
 env:
-  TARGET_BRANCH: ${{ inputs.target_branch || 'automatic-api-updates' }}
+  TARGET_BRANCH: automatic-api-updates
+  # This branch is used for automatic API updates
   FALLBACK_BRANCH: main
-  DOTNET_VERSION: '8.0.x'
-  BUILD_CONFIGURATION: Release
 
 jobs:
-  setup:
+  run:
     if: github.ref == 'refs/heads/main'
     runs-on: windows-latest
-    timeout-minutes: 10
-    outputs:
-      branch: ${{ steps.resolve_branch.outputs.branch }}
-      repositories: ${{ steps.parse_repos.outputs.repositories }}
-    
+
     steps:
     - name: Resolve branch to use
       id: resolve_branch
@@ -52,7 +36,7 @@ jobs:
         }
         
     - name: Checkout main repository
-      uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+      uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         ref: ${{ steps.resolve_branch.outputs.branch }}
@@ -62,29 +46,20 @@ jobs:
       run: "echo \"Using branch: ${{ steps.resolve_branch.outputs.branch }}\""
     
     - name: Setup .NET
-      uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4.0.0
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        dotnet-version: '8.0.x'
     
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2.0.0
+      uses: microsoft/setup-msbuild@v2
     
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@a21f25cd3998bf370fde17e3f1b4c12c175172c9 # v2.0.0
-      
-    - name: Cache NuGet packages
-      uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 # v4.0.1
-      if: ${{ !inputs.skip_cache }}
-      with:
-        path: |
-          ~/.nuget/packages
-          ${{ github.workspace }}/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.sln', '**/packages.config') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
+      uses: NuGet/setup-nuget@v2.0.1
     
-    - name: Parse repository list
-      id: parse_repos
+    - name: Create Repositories directory
+      run: mkdir Repositories
+    
+    - name: Read and clone repositories
       run: |
         # Check if repos file exists
         if (!(Test-Path "APIGenerator\APIGenerator\Repos.txt")) {
@@ -92,8 +67,7 @@ jobs:
           exit 1
         }
         
-        # Read and validate repositories
-        $validRepos = @()
+        # Read repos and clone them
         Get-Content "APIGenerator\APIGenerator\Repos.txt" | ForEach-Object {
           $repo_url = $_.Trim()
           
@@ -102,493 +76,97 @@ jobs:
             return
           }
           
-          # Validate repository URL format
-          if ($repo_url -match '^https://github\.com/[^/]+/[^/]+(?:\.git)?/?$') {
-            # Extract repo name from URL
-            $repo_name = [System.IO.Path]::GetFileNameWithoutExtension($repo_url)
-            if ($repo_name.EndsWith(".git")) {
-              $repo_name = $repo_name.Substring(0, $repo_name.Length - 4)
-            }
+          # Extract repo name from URL
+          $repo_name = [System.IO.Path]::GetFileNameWithoutExtension($repo_url)
+          if ($repo_name.EndsWith(".git")) {
+            $repo_name = $repo_name.Substring(0, $repo_name.Length - 4)
+          }
+          
+          Write-Host "Processing repository: $repo_name"
+          
+          # Clone repository
+          try {
+            git clone $repo_url "Repositories\$repo_name"
+            Write-Host "Successfully cloned $repo_name"
             
-            $validRepos += @{
-              url = $repo_url
-              name = $repo_name
-            }
-            Write-Host "✓ Valid repository: $repo_name ($repo_url)"
-          } else {
-            Write-Warning "⚠️ Invalid repository URL format: $repo_url"
-          }
-        }
-        
-        # Convert to JSON for matrix strategy
-        $matrix = @{
-          include = $validRepos
-        }
-        $matrixJson = $matrix | ConvertTo-Json -Compress -Depth 10
-        "repositories=$matrixJson" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-        
-        Write-Host "Found $($validRepos.Count) valid repositories"
-      shell: pwsh
-    
-    - name: Create Repositories directory
-      run: mkdir Repositories -Force
-      
-  build:
-    needs: setup
-    if: github.ref == 'refs/heads/main'
-    runs-on: windows-latest
-    timeout-minutes: 90
-    
-    steps:
-    - name: Checkout main repository
-      uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        ref: ${{ needs.setup.outputs.branch }}
-        fetch-depth: 1
-        
-    - name: Setup .NET
-      uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4.0.0
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
-    
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2.0.0
-    
-    - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@a21f25cd3998bf370fde17e3f1b4c12c175172c9 # v2.0.0
-      
-    - name: Cache NuGet packages
-      uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 # v4.0.1
-      if: ${{ !inputs.skip_cache }}
-      with:
-        path: |
-          ~/.nuget/packages
-          ${{ github.workspace }}/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.sln', '**/packages.config') }}-build
-        restore-keys: |
-          ${{ runner.os }}-nuget-build-
-          ${{ runner.os }}-nuget-
-          
-    - name: Create Repositories directory and BHoM Assemblies folder
-      run: |
-        mkdir Repositories -Force
-        
-        # Create BHoM Assemblies directory
-        $bhoMPath = "$env:ProgramData\BHoM\Assemblies"
-        if (!(Test-Path $bhoMPath)) {
-          mkdir $bhoMPath -Force
-          Write-Host "✅ Created BHoM Assemblies directory: $bhoMPath"
-        } else {
-          Write-Host "ℹ️ BHoM Assemblies directory already exists: $bhoMPath"
-        }
-      shell: pwsh
-    
-    - name: Clone all repositories
-      run: |
-        # Parse repository list from setup job output
-        $repositoriesJson = '${{ needs.setup.outputs.repositories }}'
-        $repositories = ($repositoriesJson | ConvertFrom-Json).include
-        
-        Write-Host "🔄 Cloning $($repositories.Count) repositories..."
-        
-        $clonedRepos = @{}
-        
-        foreach ($repo in $repositories) {
-          $repo_url = $repo.url
-          $repo_name = $repo.name
-          
-          Write-Host "🔄 Cloning repository: $repo_name"
-          Write-Host "📍 Repository URL: $repo_url"
-          
-          # Clone repository with retry logic
-          $maxRetries = 3
-          $retryCount = 0
-          $cloneSuccess = $false
-          
-          while ($retryCount -lt $maxRetries -and -not $cloneSuccess) {
-            try {
-              $retryCount++
-              Write-Host "🔄 Clone attempt $retryCount of $maxRetries"
-              
-              # Use shallow clone for performance
-              git clone --depth 1 $repo_url "Repositories\$repo_name"
-              $cloneSuccess = $true
-              Write-Host "✅ Successfully cloned $repo_name"
-            }
-            catch {
-              Write-Host "❌ Clone attempt $retryCount failed: $($_.Exception.Message)"
-              if ($retryCount -lt $maxRetries) {
-                Write-Host "⏳ Waiting 5 seconds before retry..."
-                Start-Sleep -Seconds 5
-              }
-            }
-          }
-          
-          if (-not $cloneSuccess) {
-            Write-Host "❌ Failed to clone $repo_name after $maxRetries attempts"
-            continue
-          }
-          
-          # Check if .sln file exists in base folder
-          $sln_files = Get-ChildItem "Repositories\$repo_name" -Filter "*.sln" -File -ErrorAction SilentlyContinue
-          if ($sln_files.Count -gt 0) {
-            Write-Host "✅ Found $($sln_files.Count) .sln file(s) in $repo_name"
-            
-            # Read dependencies if they exist
-            $dependenciesPath = "Repositories\$repo_name\dependencies.txt"
-            $dependencies = @()
-            if (Test-Path $dependenciesPath) {
-              $dependencies = Get-Content $dependenciesPath | Where-Object { 
-                $_.Trim() -and -not $_.Trim().StartsWith("#") 
-              } | ForEach-Object { $_.Trim() }
-              Write-Host "📋 Dependencies for $repo_name`: $($dependencies -join ', ')"
+            # Check if .sln file exists in base folder
+            $sln_files = Get-ChildItem "Repositories\$repo_name" -Filter "*.sln" -File
+            if ($sln_files.Count -gt 0) {
+              Write-Host "✓ Found .sln file in $repo_name - keeping repository"
+              $repo_name | Add-Content "valid_repos.txt" -Encoding UTF8
             } else {
-              Write-Host "ℹ️ No dependencies.txt found for $repo_name"
+              Write-Host "✗ No .sln file found in base folder of $repo_name - Repo not built"
             }
-            
-            $clonedRepos[$repo_name] = @{
-              url = $repo_url
-              name = $repo_name
-              dependencies = $dependencies
-              hasSln = $true
-            }
-          } else {
-            Write-Host "⚠️ No .sln file found in base folder of $repo_name - skipping build"
-            $clonedRepos[$repo_name] = @{
-              url = $repo_url
-              name = $repo_name
-              dependencies = @()
-              hasSln = $false
-            }
+          } catch {
+            Write-Host "Failed to clone $repo_name"
           }
         }
         
-        # Save cloned repositories info for build ordering
-        $clonedRepos | ConvertTo-Json -Depth 10 | Out-File -FilePath "cloned_repos.json" -Encoding UTF8
-        Write-Host "✅ Cloned $($clonedRepos.Count) repositories successfully"
+        # Show summary
+        if (Test-Path "valid_repos.txt") {
+          Write-Host "Valid repositories to compile:"
+          Get-Content "valid_repos.txt"
+        } else {
+          Write-Host "No valid repositories found with .sln files"
+        }
       shell: pwsh
     
-    - name: Determine build order using dependency analysis
+    - name: Compile repositories in order
       run: |
-        Write-Host "📋 Analyzing dependencies and determining build order..."
-        
-        # Load cloned repositories data
-        $clonedRepos = Get-Content "cloned_repos.json" | ConvertFrom-Json
-        
-        # Convert to hashtable for easier access
-        $repoData = @{}
-        $clonedRepos.PSObject.Properties | ForEach-Object {
-          $repoData[$_.Name] = $_.Value
-        }
-        
-        # Function to perform topological sort
-        function Get-BuildOrder {
-          param($repos)
-          
-          $buildOrder = @()
-          $visited = @{}
-          $visiting = @{}
-          
-          function Visit-Repository($repoName) {
-            if ($visiting[$repoName]) {
-              Write-Warning "⚠️ Circular dependency detected involving $repoName"
-              return
-            }
-            
-            if ($visited[$repoName]) {
-              return
-            }
-            
-            $visiting[$repoName] = $true
-            
-            # Visit dependencies first
-            if ($repos[$repoName] -and $repos[$repoName].dependencies) {
-              foreach ($dep in $repos[$repoName].dependencies) {
-                if ($repos[$dep]) {
-                  Visit-Repository $dep
-                }
-              }
-            }
-            
-            $visiting[$repoName] = $false
-            $visited[$repoName] = $true
-            
-            # Only add repositories that have .sln files
-            if ($repos[$repoName] -and $repos[$repoName].hasSln) {
-              $buildOrder += $repoName
-            }
-          }
-          
-          # Visit all repositories
-          foreach ($repoName in $repos.Keys) {
-            if (-not $visited[$repoName]) {
-              Visit-Repository $repoName
-            }
-          }
-          
-          return $buildOrder
-        }
-        
-        # Get the correct build order
-        $buildOrder = Get-BuildOrder $repoData
-        
-        Write-Host "🎯 Determined build order:"
-        for ($i = 0; $i -lt $buildOrder.Count; $i++) {
-          Write-Host "   $($i + 1). $($buildOrder[$i])"
-        }
-        
-        # Save build order to file
-        $buildOrder | ConvertTo-Json | Out-File -FilePath "build_order.json" -Encoding UTF8
-        
-        Write-Host "✅ Build order analysis complete"
-      shell: pwsh
-    
-    - name: Build repositories in dependency order
-      run: |
-        Write-Host "🔨 Starting dependency-ordered build process..."
-        
-        # Load build order
-        $buildOrder = Get-Content "build_order.json" | ConvertFrom-Json
-        $clonedRepos = Get-Content "cloned_repos.json" | ConvertFrom-Json
-        
-        if ($buildOrder.Count -eq 0) {
-          Write-Host "ℹ️ No repositories with .sln files to build"
+        if (!(Test-Path "valid_repos.txt")) {
+          Write-Host "No valid repositories to compile"
           exit 0
         }
         
-        $totalRepos = $buildOrder.Count
-        $builtCount = 0
-        $failedRepos = @()
-        
-        foreach ($repoName in $buildOrder) {
-          $builtCount++
-          Write-Host ""
-          Write-Host "🔨 [$builtCount/$totalRepos] Building repository: $repoName"
-          Write-Host "=" * 60
+        # Compile each valid repository
+        Get-Content "valid_repos.txt" | ForEach-Object {
+          $repo_name = $_.Trim()
+          Write-Host "Compiling repository: $repo_name"
           
-          if (!(Test-Path "Repositories\$repoName")) {
-            Write-Host "❌ Repository directory not found: $repoName"
-            $failedRepos += $repoName
-            continue
-          }
-          
-          Push-Location "Repositories\$repoName"
+          Push-Location "Repositories\$repo_name"
           
           try {
-            # Find and process all .sln files
-            $sln_files = Get-ChildItem -Filter "*.sln" -File -ErrorAction SilentlyContinue
-            if ($sln_files.Count -eq 0) {
-              Write-Host "⚠️ No .sln files found in $repoName"
-              continue
+            # Find and restore packages for all .sln files
+            Get-ChildItem -Filter "*.sln" -File | ForEach-Object {
+              Write-Host "Restoring packages for $($_.Name)"
+              dotnet restore $_.Name 2>&1 | Tee-Object -Variable restoreOutput
+              Write-Host $restoreOutput
             }
             
-            $repoSuccess = $true
-            
-            foreach ($sln_file in $sln_files) {
-              Write-Host "📦 Processing solution: $($sln_file.Name)"
-              
-              # Restore packages with retry logic
-              $maxRetries = 3
-              $retryCount = 0
-              $restoreSuccess = $false
-              
-              while ($retryCount -lt $maxRetries -and -not $restoreSuccess) {
-                try {
-                  $retryCount++
-                  Write-Host "🔄 Restore attempt $retryCount of $maxRetries for $($sln_file.Name)"
-                  
-                  dotnet restore $sln_file.Name --verbosity minimal
-                  if ($LASTEXITCODE -eq 0) {
-                    $restoreSuccess = $true
-                    Write-Host "✅ Package restore successful for $($sln_file.Name)"
-                  }
-                }
-                catch {
-                  Write-Host "❌ Restore attempt $retryCount failed: $($_.Exception.Message)"
-                  if ($retryCount -lt $maxRetries) {
-                    Start-Sleep -Seconds 3
-                  }
-                }
-              }
-              
-              if (-not $restoreSuccess) {
-                Write-Host "⚠️ Package restore failed, trying NuGet restore..."
-                nuget restore $sln_file.Name
-              }
-              
-              # Build with dotnet first
-              Write-Host "🔨 Building $($sln_file.Name) with dotnet build..."
-              dotnet build $sln_file.Name --configuration $env:BUILD_CONFIGURATION --no-restore --verbosity minimal
+            # Build all .sln files in the repository
+            Get-ChildItem -Filter "*.sln" -File | ForEach-Object {
+              Write-Host "Building $($_.Name) with dotnet build"
+              dotnet build $_.Name --configuration Release --no-restore 2>&1 | Tee-Object -Variable buildOutput
+              Write-Host $buildOutput
               
               if ($LASTEXITCODE -eq 0) {
-                Write-Host "✅ Successfully built $($sln_file.Name) with dotnet build"
+                Write-Host "✓ Successfully built $($_.Name) with dotnet build"
               } else {
-                Write-Host "⚠️ dotnet build failed for $($sln_file.Name), trying MSBuild..."
+                Write-Host "✗ dotnet build failed for $($_.Name), trying MSBuild..." -ForegroundColor Yellow
+                Write-Host "dotnet build errors:" -ForegroundColor Red
+                Write-Host $buildOutput -ForegroundColor Red
                 
-                # Fallback to MSBuild
-                msbuild $sln_file.Name /p:Configuration=$env:BUILD_CONFIGURATION /p:Platform="Any CPU" /m /verbosity:minimal
+                # Restore packages with MSBuild/NuGet
+                Write-Host "Restoring packages with MSBuild..."
+                nuget restore $_.Name
+                
+                # Try with MSBuild as fallback
+                msbuild $_.Name /p:Configuration=Release /p:Platform="Any CPU" /m 2>&1 | Tee-Object -Variable msbuildOutput
+                Write-Host $msbuildOutput
                 
                 if ($LASTEXITCODE -eq 0) {
-                  Write-Host "✅ Successfully built $($sln_file.Name) with MSBuild"
+                  Write-Host "✓ Successfully built $($_.Name) with MSBuild"
                 } else {
-                  Write-Host "❌ Both dotnet build and MSBuild failed for $($sln_file.Name)"
-                  $repoSuccess = $false
-                }
-              }
-              
-              # Copy assemblies to BHoM folder if build was successful
-              if ($LASTEXITCODE -eq 0) {
-                Write-Host "📁 Copying assemblies to BHoM Assemblies folder..."
-                $binPaths = @(
-                  "bin\$env:BUILD_CONFIGURATION\net*\*.dll",
-                  "*/bin\$env:BUILD_CONFIGURATION\net*\*.dll"
-                )
-                
-                $bhoMPath = "$env:ProgramData\BHoM\Assemblies"
-                $copiedCount = 0
-                
-                foreach ($binPattern in $binPaths) {
-                  $assemblies = Get-ChildItem -Path $binPattern -Recurse -ErrorAction SilentlyContinue
-                  foreach ($assembly in $assemblies) {
-                    try {
-                      Copy-Item -Path $assembly.FullName -Destination $bhoMPath -Force -ErrorAction SilentlyContinue
-                      $copiedCount++
-                    }
-                    catch {
-                      # Ignore copy errors - some assemblies might be in use
-                    }
-                  }
-                }
-                
-                if ($copiedCount -gt 0) {
-                  Write-Host "✅ Copied $copiedCount assemblies to BHoM folder"
-                } else {
-                  Write-Host "ℹ️ No assemblies found to copy for $($sln_file.Name)"
+                  Write-Host "✗ Both dotnet build and MSBuild failed for $($_.Name)" -ForegroundColor Red
+                  Write-Host "MSBuild errors:" -ForegroundColor Red
+                  Write-Host $msbuildOutput -ForegroundColor Red
+                  exit 1
                 }
               }
             }
-            
-            if ($repoSuccess) {
-              Write-Host "🎉 Successfully built all solutions in $repoName"
-            } else {
-              Write-Host "❌ Some builds failed in $repoName"
-              $failedRepos += $repoName
-            }
-            
           } finally {
             Pop-Location
           }
-        }
-        
-        Write-Host ""
-        Write-Host "📊 Build Summary:"
-        Write-Host "   Total repositories: $totalRepos"
-        Write-Host "   Successfully built: $($totalRepos - $failedRepos.Count)"
-        Write-Host "   Failed: $($failedRepos.Count)"
-        
-        if ($failedRepos.Count -gt 0) {
-          Write-Host "❌ Failed repositories:"
-          foreach ($failedRepo in $failedRepos) {
-            Write-Host "   - $failedRepo"
-          }
-          
-          # Don't fail the entire workflow for individual repository failures
-          # This allows the API generation to proceed with successfully built repositories
-          Write-Host "⚠️ Some repositories failed to build, but continuing with API generation..."
-        } else {
-          Write-Host "🎉 All repositories built successfully!"
-        }
-      shell: pwsh
-      
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
-      with:
-        name: build-output-all
-        path: |
-          Repositories/*/bin/**
-          ${{ env.ProgramData }}/BHoM/Assemblies/**
-        retention-days: 1
-        if-no-files-found: warn
-    
-  generate:
-    needs: [setup, build]
-    if: github.ref == 'refs/heads/main' && !cancelled()
-    runs-on: windows-latest
-    timeout-minutes: 30
-    
-    steps:
-    - name: Checkout main repository
-      uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        ref: ${{ needs.setup.outputs.branch }}
-        fetch-depth: 0
-        
-    - name: Setup .NET
-      uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4.0.0
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
-    
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2.0.0
-    
-    - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@a21f25cd3998bf370fde17e3f1b4c12c175172c9 # v2.0.0
-      
-    - name: Cache NuGet packages
-      uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 # v4.0.1
-      if: ${{ !inputs.skip_cache }}
-      with:
-        path: |
-          ~/.nuget/packages
-          ${{ github.workspace }}/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.sln', '**/packages.config') }}-apigen
-        restore-keys: |
-          ${{ runner.os }}-nuget-apigen-
-          ${{ runner.os }}-nuget-
-          
-    - name: Download build artifacts
-      uses: actions/download-artifact@c850b930e6ba138125429b7e5c93fc707a7f8427 # v4.1.4
-      with:
-        name: build-output-all
-        path: artifacts
-        
-    - name: Restore build artifacts and BHoM assemblies
-      run: |
-        # Restore BHoM Assemblies directory
-        $bhoMPath = "$env:ProgramData\BHoM\Assemblies"
-        if (!(Test-Path $bhoMPath)) {
-          mkdir $bhoMPath -Force
-          Write-Host "✅ Created BHoM Assemblies directory: $bhoMPath"
-        }
-        
-        # Restore artifacts
-        if (Test-Path "artifacts") {
-          Write-Host "📁 Restoring build artifacts..."
-          
-          # Restore repository build outputs
-          if (Test-Path "artifacts\Repositories") {
-            Write-Host "📦 Restoring repository build outputs..."
-            if (!(Test-Path "Repositories")) {
-              mkdir "Repositories" -Force
-            }
-            Copy-Item -Path "artifacts\Repositories\*" -Destination "Repositories" -Recurse -Force
-            Write-Host "✅ Repository build outputs restored"
-          }
-          
-          # Restore BHoM assemblies
-          $artifactBhoMPath = "artifacts\$($env:ProgramData -replace ':', '')\BHoM\Assemblies"
-          if (Test-Path $artifactBhoMPath) {
-            Write-Host "📦 Restoring BHoM assemblies..."
-            Copy-Item -Path "$artifactBhoMPath\*" -Destination $bhoMPath -Force -ErrorAction SilentlyContinue
-            $assemblyCount = (Get-ChildItem $bhoMPath -File -ErrorAction SilentlyContinue).Count
-            Write-Host "✅ Restored $assemblyCount assemblies to BHoM folder"
-          } else {
-            Write-Host "ℹ️ No BHoM assemblies found in artifacts"
-          }
-        } else {
-          Write-Host "⚠️ No build artifacts found - API generation may not work correctly"
         }
       shell: pwsh
     
@@ -596,135 +174,112 @@ jobs:
       run: |
         $docsPath = "docs\oM"
         if (Test-Path $docsPath) {
-          Write-Host "🧹 Found docs/oM folder, cleaning subfolders..."
+          Write-Host "Found docs/oM folder, removing all subfolders and their content..."
           
           # Get all subdirectories in docs/oM
-          $subfolders = Get-ChildItem -Path $docsPath -Directory -ErrorAction SilentlyContinue
+          $subfolders = Get-ChildItem -Path $docsPath -Directory
           
           if ($subfolders.Count -gt 0) {
             foreach ($folder in $subfolders) {
-              Write-Host "🗑️ Removing subfolder: $($folder.Name)"
-              Remove-Item -Path $folder.FullName -Recurse -Force -ErrorAction SilentlyContinue
+              Write-Host "Removing subfolder: $($folder.Name)"
+              Remove-Item -Path $folder.FullName -Recurse -Force
             }
-            Write-Host "✅ Successfully removed $($subfolders.Count) subfolders from docs/oM"
+            Write-Host "✓ Successfully removed $($subfolders.Count) subfolders from docs/oM"
           } else {
-            Write-Host "ℹ️ No subfolders found in docs/oM"
+            Write-Host "No subfolders found in docs/oM"
           }
         } else {
-          Write-Host "ℹ️ docs/oM folder not found, skipping cleanup"
+          Write-Host "docs/oM folder not found, skipping cleanup"
         }
       shell: pwsh
     
     - name: Compile APIGenerator solution
       run: |
-        Write-Host "🔨 Compiling APIGenerator.sln"
+        Write-Host "Compiling APIGenerator.sln"
         
         # Check if the solution file exists
         if (!(Test-Path "APIGenerator\APIGenerator.sln")) {
-          Write-Error "❌ APIGenerator.sln not found at APIGenerator\APIGenerator.sln"
+          Write-Error "Error: APIGenerator.sln not found at APIGenerator\APIGenerator.sln"
           exit 1
         }
         
-        # Restore packages with retry logic
-        $maxRetries = 3
-        $retryCount = 0
-        $restoreSuccess = $false
-        
-        while ($retryCount -lt $maxRetries -and -not $restoreSuccess) {
-          try {
-            $retryCount++
-            Write-Host "🔄 Package restore attempt $retryCount of $maxRetries"
-            
-            dotnet restore "APIGenerator\APIGenerator.sln" --verbosity minimal
-            if ($LASTEXITCODE -eq 0) {
-              $restoreSuccess = $true
-              Write-Host "✅ Package restore successful"
-            }
-          }
-          catch {
-            Write-Host "❌ Restore attempt $retryCount failed"
-            if ($retryCount -lt $maxRetries) {
-              Start-Sleep -Seconds 3
-            }
-          }
-        }
-        
-        if (-not $restoreSuccess) {
-          Write-Host "⚠️ dotnet restore failed, trying MSBuild restore..."
-          msbuild "APIGenerator\APIGenerator.sln" -t:Restore /p:Configuration=$env:BUILD_CONFIGURATION /verbosity:minimal
-        }
+        # Restore packages
+        Write-Host "Restoring packages for APIGenerator.sln"
+        dotnet restore "APIGenerator\APIGenerator.sln" 2>&1 | Tee-Object -Variable restoreOutput
+        Write-Host $restoreOutput
         
         # Build the solution
-        Write-Host "🔨 Building APIGenerator.sln with dotnet build"
-        dotnet build "APIGenerator\APIGenerator.sln" --configuration $env:BUILD_CONFIGURATION --no-restore --verbosity minimal
+        Write-Host "Building APIGenerator.sln with dotnet build"
+        dotnet build "APIGenerator\APIGenerator.sln" --configuration Release --no-restore 2>&1 | Tee-Object -Variable buildOutput
+        Write-Host $buildOutput
         
         if ($LASTEXITCODE -ne 0) {
-          Write-Host "⚠️ dotnet build failed, trying MSBuild..."
+          Write-Host "dotnet build failed, trying MSBuild..." -ForegroundColor Yellow
+          Write-Host "dotnet build errors:" -ForegroundColor Red
+          Write-Host $buildOutput -ForegroundColor Red
           
-          msbuild "APIGenerator\APIGenerator.sln" /p:Configuration=$env:BUILD_CONFIGURATION /p:Platform="Any CPU" /m /verbosity:minimal
+          # Restore packages with MSBuild
+          Write-Host "Restoring packages with MSBuild..."
+          msbuild "APIGenerator\APIGenerator.sln" -t:Restore /p:Configuration=Release 2>&1 | Tee-Object -Variable msbuildRestoreOutput
+          Write-Host $msbuildRestoreOutput
+          
+          msbuild "APIGenerator\APIGenerator.sln" /p:Configuration=Release /p:Platform="Any CPU" /m 2>&1 | Tee-Object -Variable msbuildOutput
+          Write-Host $msbuildOutput
           
           if ($LASTEXITCODE -ne 0) {
-            Write-Error "❌ Both dotnet build and MSBuild failed for APIGenerator.sln"
+            Write-Host "Both dotnet build and MSBuild failed for APIGenerator.sln" -ForegroundColor Red
+            Write-Host "MSBuild errors:" -ForegroundColor Red
+            Write-Host $msbuildOutput -ForegroundColor Red
             exit 1
           } else {
-            Write-Host "✅ Successfully built APIGenerator.sln with MSBuild"
+            Write-Host "✓ Successfully built APIGenerator.sln with MSBuild"
           }
         } else {
-          Write-Host "✅ Successfully built APIGenerator.sln with dotnet build"
+          Write-Host "✓ Successfully built APIGenerator.sln with dotnet build"
         }
       shell: pwsh
     
     - name: Find and run APIGenerator executable
       run: |
-        Write-Host "🔍 Looking for APIGenerator executable..."
+        Write-Host "Looking for APIGenerator executable..."
         
         # Look for the executable in common build output locations
         $possible_paths = @(
-          "APIGenerator\APIGenerator\bin\$env:BUILD_CONFIGURATION\net*\APIGenerator.exe",
-          "APIGenerator\bin\$env:BUILD_CONFIGURATION\net*\APIGenerator.exe"
+          "APIGenerator\APIGenerator\bin\Release\net*\APIGenerator.exe",
+          "APIGenerator\bin\Release\net*\APIGenerator.exe"
         )
         
         $exe_path = $null
         foreach ($pattern in $possible_paths) {
-          Write-Host "🔍 Searching pattern: $pattern"
           $found_files = Get-ChildItem -Path $pattern -ErrorAction SilentlyContinue
           if ($found_files) {
             $exe_path = $found_files[0].FullName
-            Write-Host "✅ Found executable: $exe_path"
             break
           }
         }
         
         # If no .exe found, try using dotnet run
         if ([string]::IsNullOrEmpty($exe_path)) {
-          Write-Host "⚠️ No executable found, trying dotnet run..."
+          Write-Host "No executable found, trying dotnet run..."
           
           if (Test-Path "APIGenerator\APIGenerator.csproj") {
-            Write-Host "🚀 Running APIGenerator via dotnet run (APIGenerator\APIGenerator.csproj)..."
             Push-Location "APIGenerator"
-            dotnet run --project APIGenerator.csproj --configuration $env:BUILD_CONFIGURATION --verbosity minimal
+            dotnet run --project APIGenerator.csproj --configuration Release
             Pop-Location
           } elseif (Test-Path "APIGenerator\APIGenerator\APIGenerator.csproj") {
-            Write-Host "🚀 Running APIGenerator via dotnet run (APIGenerator\APIGenerator\APIGenerator.csproj)..."
             Push-Location "APIGenerator"
-            dotnet run --project APIGenerator\APIGenerator.csproj --configuration $env:BUILD_CONFIGURATION --verbosity minimal
+            dotnet run --project APIGenerator\APIGenerator.csproj --configuration Release
             Pop-Location
           } else {
-            Write-Error "❌ Could not find APIGenerator.csproj file"
+            Write-Error "Could not find APIGenerator.csproj file"
             exit 1
           }
         } else {
-          Write-Host "🚀 Running APIGenerator executable..."
+          Write-Host "Found executable at: $exe_path"
+          Write-Host "Running APIGenerator..."
           
-          # Run the executable with timeout
-          $process = Start-Process -FilePath $exe_path -NoNewWindow -PassThru -Wait
-          
-          if ($process.ExitCode -eq 0) {
-            Write-Host "✅ APIGenerator completed successfully"
-          } else {
-            Write-Error "❌ APIGenerator failed with exit code: $($process.ExitCode)"
-            exit 1
-          }
+          # Run the executable
+          & $exe_path
         }
       shell: pwsh
     
@@ -736,9 +291,6 @@ jobs:
 
         # Create and checkout new branch (or switch if exists)
         $branch_name = "${{ env.TARGET_BRANCH }}"
-        $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
-        
-        Write-Host "🔄 Switching to branch: $branch_name"
         git checkout $branch_name 2>$null || git checkout -b $branch_name
 
         # Add all changes (including new files and directories)
@@ -747,103 +299,27 @@ jobs:
         # Check if there are any changes to commit
         $changes = git status --porcelain
         if ($changes) {
-          Write-Host "📝 Changes detected, preparing commit..."
-          
-          # Show what changed
-          Write-Host "📋 Changed files:"
-          git status --porcelain | ForEach-Object { Write-Host "   $_" }
-          
-          # Commit with detailed message
-          $commitMessage = @"
-APIGenerator workflow results - $timestamp
+          Write-Host "Changes detected, committing..."
+          git commit -m "APIGenerator workflow results - $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 
-- Generated API documentation from latest repository builds
-- Workflow run: ${{ github.run_number }}
-- Triggered by: ${{ github.event_name }}
-- Repository count: Built from multiple repositories in parallel
-"@
-          
-          git commit -m $commitMessage
-          Write-Host "✅ Committed changes successfully"
+          # Push the branch
+          git push origin $branch_name
+          Write-Host "Successfully pushed changes to branch: $branch_name"
 
-          # Push the branch with retry logic
-          $maxRetries = 3
-          $retryCount = 0
-          $pushSuccess = $false
-          
-          while ($retryCount -lt $maxRetries -and -not $pushSuccess) {
-            try {
-              $retryCount++
-              Write-Host "🔄 Push attempt $retryCount of $maxRetries"
-              
-              git push origin $branch_name
-              $pushSuccess = $true
-              Write-Host "✅ Successfully pushed changes to branch: $branch_name"
-            }
-            catch {
-              Write-Host "❌ Push attempt $retryCount failed"
-              if ($retryCount -lt $maxRetries) {
-                Write-Host "⏳ Waiting 5 seconds before retry..."
-                Start-Sleep -Seconds 5
-                
-                # Try to pull any remote changes first
-                git pull origin $branch_name --rebase 2>$null || $true
-              }
-            }
-          }
-          
-          if (-not $pushSuccess) {
-            Write-Error "❌ Failed to push changes after $maxRetries attempts"
-            exit 1
-          }
-
-          # Handle pull request creation/update
-          Write-Host "🔍 Checking for existing pull request..."
-          $existingPr = gh pr list --head $branch_name --base main --json number --jq '.[0].number' 2>$null
-          
-          if ($existingPr -and $existingPr -ne "null" -and $existingPr -ne "") {
-            Write-Host "📝 PR already exists (#$existingPr), adding update comment..."
-            $prComment = @"
-🤖 **Automated API Documentation Update**
-
-📅 **Updated:** $timestamp  
-🔢 **Workflow Run:** #${{ github.run_number }}  
-🚀 **Trigger:** ${{ github.event_name }}  
-
-The API documentation has been regenerated from the latest repository builds and pushed to this branch.
-"@
-            gh pr comment $existingPr --body $prComment
-            Write-Host "✅ Comment added to existing PR #$existingPr"
+          # Check if a PR already exists for this branch
+          $existingPr = gh pr list --head $branch_name --base main --json number --jq '.[0].number'
+          if ($existingPr) {
+          Write-Host "PR already exists (#$existingPr), adding a comment..."
+          gh pr comment $existingPr --body "Automated API documentation updates pushed to branch '$branch_name' on $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')."
+          Write-Host "✓ Comment added to existing PR"
           } else {
-            Write-Host "📝 Creating new pull request..."
-            $prTitle = "🤖 API Documentation Updates - $timestamp"
-            $prBody = @"
-## 🤖 Automated API Documentation Updates
-
-This pull request contains automatically generated API documentation updates.
-
-### 📋 Details
-- **Generated:** $timestamp
-- **Workflow Run:** #${{ github.run_number }}
-- **Triggered by:** ${{ github.event_name }}
-- **Branch:** ``$branch_name``
-
-### 🔄 What's Updated
-- API documentation regenerated from latest repository builds
-- Documentation processed in parallel for improved performance
-- All repositories with .sln files were built and processed
-
-### ✅ Ready for Review
-This PR is ready for review and can be merged when approved.
-"@
-            
-            gh pr create --title $prTitle --body $prBody --head $branch_name --base main
-            Write-Host "✅ Pull request created successfully"
+          Write-Host "Creating pull request..."
+          gh pr create --title "API Updates" --body "Automated API documentation updates generated by APIGenerator workflow on $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" --head $branch_name --base main
+          Write-Host "✓ Pull request created successfully"
           }
         } else {
-          Write-Host "ℹ️ No changes to commit - documentation is up to date"
+          Write-Host "No changes to commit"
         }
       shell: pwsh
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
