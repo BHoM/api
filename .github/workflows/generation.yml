@@ -5,15 +5,40 @@ on:
   schedule:
     - cron: '0 1 * * 0' # Every Sunday at 1 AM UTC
 
+env:
+  TARGET_BRANCH: automatic-api-updates
+  # This branch is used for automatic API updates
+  FALLBACK_BRANCH: main
+
 jobs:
-  build-and-run:
+  run:
     runs-on: windows-latest
-    
+
     steps:
+    - name: Resolve branch to use
+      id: resolve_branch
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TARGET_BRANCH: ${{ env.TARGET_BRANCH }}
+        FALLBACK_BRANCH: ${{ env.FALLBACK_BRANCH }}
+      run: |
+        set -euo pipefail
+        REPO="github.com/${GITHUB_REPOSITORY}"
+        if git ls-remote --heads "https://x-access-token:${GITHUB_TOKEN}@${REPO}" "${TARGET_BRANCH}" | grep -q "refs/heads/${TARGET_BRANCH}"; then
+          echo "branch=${TARGET_BRANCH}" >> "$GITHUB_OUTPUT"
+        else
+          echo "branch=${FALLBACK_BRANCH}" >> "$GITHUB_OUTPUT"
+        fi
+        
     - name: Checkout main repository
       uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        ref: ${{ steps.resolve_branch.outputs.branch }}
+        fetch-depth: 0
+        
+    - name: Show which branch was used
+      run: "echo \"Using branch: ${{ steps.resolve_branch.outputs.branch }}\""
     
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -260,7 +285,7 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         
         # Create and checkout new branch
-        $branch_name = "github-actions-test"
+        $branch_name = "${{ env.TARGET_BRANCH }}"
         git checkout -b $branch_name
         
         # Add all changes (including new files and directories)
