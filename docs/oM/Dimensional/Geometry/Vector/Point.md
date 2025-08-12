@@ -104,17 +104,3 @@ The object is defined as a JSON schema. You can validate a JSON instance against
 The JSON Schema is available on github here:
 
 - [Point.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Geometry_oM/Point.json)
-### Example JSON instance
-
-Example JSON instance of type Point.
-
-``` json title="Example JSON"
-{
-  "_t": "BH.oM.Geometry.Point",
-  "X": 1.0,
-  "Y": 2.0,
-  "Z": 3.0,
-  "_bhomVersion": "8.2"
-}
-```
-

@@ -81,28 +81,3 @@ The object is defined as a JSON schema. You can validate a JSON instance against
 The JSON Schema is available on github here:
 
 - [Cone.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Geometry_oM/Cone.json)
-### Example JSON instance
-
-Example JSON instance of type Cone.
-
-``` json title="Example JSON"
-{
-  "_t": "BH.oM.Geometry.Cone",
-  "Centre": {
-    "_t": "BH.oM.Geometry.Point",
-    "X": 0.0,
-    "Y": 0.0,
-    "Z": 0.0
-  },
-  "Axis": {
-    "_t": "BH.oM.Geometry.Vector",
-    "X": 0.0,
-    "Y": 0.0,
-    "Z": 1.0
-  },
-  "Radius": 3.0,
-  "Height": 8.0,
-  "_bhomVersion": "8.2"
-}
-```
-

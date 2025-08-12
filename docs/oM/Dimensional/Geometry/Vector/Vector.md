@@ -85,17 +85,3 @@ The object is defined as a JSON schema. You can validate a JSON instance against
 The JSON Schema is available on github here:
 
 - [Vector.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Geometry_oM/Vector.json)
-### Example JSON instance
-
-Example JSON instance of type Vector.
-
-``` json title="Example JSON"
-{
-  "_t": "BH.oM.Geometry.Vector",
-  "X": 0.0,
-  "Y": 0.0,
-  "Z": 10.0,
-  "_bhomVersion": "8.2"
-}
-```
-
