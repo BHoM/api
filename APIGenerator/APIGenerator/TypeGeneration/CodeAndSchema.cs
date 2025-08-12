@@ -106,6 +106,7 @@ namespace APIGenerator
 
         public static string TryGetExampleJson(this Type type, string basePath)
         {
+            basePath = basePath.Replace("docs\\", "");
             basePath = Path.Combine(basePath, "APIGenerator", "APIGenerator", "JsonExamples");
 
             string dir = Path.Combine(basePath, type.Assembly.GetName().Name);
