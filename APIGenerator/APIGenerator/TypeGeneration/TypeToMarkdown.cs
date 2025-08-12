@@ -117,7 +117,7 @@ namespace APIGenerator
             FieldInfo[] fields = type.GetFields();
             markdown += fields.EnumTable();
             markdown += "\n\n";
-            markdown += Links(type);
+            markdown += Links(type, basePath);
 
             Write(filePath, markdown);
             return false;
@@ -169,7 +169,7 @@ namespace APIGenerator
             markdown += type.TypeStructure("Class", "class", out var baseTypes);
 
             markdown += "\n\n";
-            markdown += Links(type);
+            markdown += Links(type, basePath);
 
             Write(filePath, markdown);
             return false;
@@ -227,7 +227,7 @@ namespace APIGenerator
 
             markdown += type.TypeStructure(classWordCaptial, classWord, out baseTypes);
 
-            markdown += Links(type);
+            markdown += Links(type, basePath);
 
             Write(filePath, markdown);
 
