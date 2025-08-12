@@ -38,7 +38,7 @@ foreach (Assembly assembly in oMAssemblies)
     {
         if (!(type.IsAbstract && type.IsSealed) && (type.IsEnum || typeof(IObject).IsAssignableFrom(type)))
         {
-            TypeToMarkdown.WriteTypeToMarkdown(Path.Combine(rootFolder, "docs"), type, methods, genericMethods);
+            TypeToMarkdown.WriteTypeToMarkdown(Path.Combine(rootFolder, @"docs\"), type, methods, genericMethods);
         }
     }
 }
