@@ -83,26 +83,3 @@ The object is defined as a JSON schema. You can validate a JSON instance against
 The JSON Schema is available on github here:
 
 - [BoundingBox.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Geometry_oM/BoundingBox.json)
-### Example JSON instance
-
-Example JSON instance of type BoundingBox.
-
-``` json title="Example JSON"
-{
-  "_t": "BH.oM.Geometry.BoundingBox",
-  "Min": {
-    "_t": "BH.oM.Geometry.Point",
-    "X": 0.0,
-    "Y": 0.0,
-    "Z": 0.0
-  },
-  "Max": {
-    "_t": "BH.oM.Geometry.Point",
-    "X": 10.0,
-    "Y": 10.0,
-    "Z": 5.0
-  },
-  "_bhomVersion": "8.2"
-}
-```
-

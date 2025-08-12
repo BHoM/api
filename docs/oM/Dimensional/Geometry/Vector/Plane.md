@@ -78,26 +78,3 @@ The object is defined as a JSON schema. You can validate a JSON instance against
 The JSON Schema is available on github here:
 
 - [Plane.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Geometry_oM/Plane.json)
-### Example JSON instance
-
-Example JSON instance of type Plane.
-
-``` json title="Example JSON"
-{
-  "_t": "BH.oM.Geometry.Plane",
-  "Origin": {
-    "_t": "BH.oM.Geometry.Point",
-    "X": 0.0,
-    "Y": 0.0,
-    "Z": 0.0
-  },
-  "Normal": {
-    "_t": "BH.oM.Geometry.Vector",
-    "X": 0.0,
-    "Y": 0.0,
-    "Z": 1.0
-  },
-  "_bhomVersion": "8.2"
-}
-```
-

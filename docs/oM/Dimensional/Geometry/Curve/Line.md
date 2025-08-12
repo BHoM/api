@@ -140,27 +140,3 @@ The object is defined as a JSON schema. You can validate a JSON instance against
 The JSON Schema is available on github here:
 
 - [Line.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Geometry_oM/Line.json)
-### Example JSON instance
-
-Example JSON instance of type Line.
-
-``` json title="Example JSON"
-{
-  "_t": "BH.oM.Geometry.Line",
-  "Start": {
-    "_t": "BH.oM.Geometry.Point",
-    "X": 0.0,
-    "Y": 0.0,
-    "Z": 0.0
-  },
-  "End": {
-    "_t": "BH.oM.Geometry.Point",
-    "X": 0.0,
-    "Y": 0.0,
-    "Z": 10.0
-  },
-  "Infinite": false,
-  "_bhomVersion": "8.2"
-}
-```
-
