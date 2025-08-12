@@ -2,16 +2,6 @@ name: APIGenerator CI/CD Pipeline
 
 on:
   workflow_dispatch:
-    inputs:
-      target_branch:
-        description: 'Target branch for API updates'
-        required: false
-        default: 'automatic-api-updates'
-      skip_cache:
-        description: 'Skip cache and force rebuild'
-        required: false
-        default: false
-        type: boolean
   schedule:
     - cron: '0 1 * * 0' # Every Sunday at 1 AM UTC
     
@@ -21,7 +11,7 @@ permissions:
   actions: read
 
 env:
-  TARGET_BRANCH: ${{ inputs.target_branch || 'automatic-api-updates' }}
+  TARGET_BRANCH: automatic-api-updates
   FALLBACK_BRANCH: main
   DOTNET_VERSION: '8.0.x'
   BUILD_CONFIGURATION: Release
@@ -74,7 +64,7 @@ jobs:
       
     - name: Cache NuGet packages
       uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 # v4.0.1
-      if: ${{ !inputs.skip_cache }}
+
       with:
         path: |
           ~/.nuget/packages
@@ -160,7 +150,7 @@ jobs:
       
     - name: Cache NuGet packages
       uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 # v4.0.1
-      if: ${{ !inputs.skip_cache }}
+
       with:
         path: |
           ~/.nuget/packages
@@ -538,7 +528,7 @@ jobs:
       
     - name: Cache NuGet packages
       uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 # v4.0.1
-      if: ${{ !inputs.skip_cache }}
+
       with:
         path: |
           ~/.nuget/packages
