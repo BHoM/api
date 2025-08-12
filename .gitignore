@@ -63,3 +63,7 @@ bld/
 # Repos to document #
 ###########################
 [Rr]epositories/
+
+# Files genereted by ci #
+###########################
+valid_repos.txt
