@@ -252,17 +252,6 @@ jobs:
         }
       shell: pwsh
     
-    - name: Upload build artifacts (optional)
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: build-logs
-        path: |
-          **/bin/
-          **/obj/
-          valid_repos.txt
-        retention-days: 7
-    
     - name: Commit and push changes
       run: |
         # Configure git
