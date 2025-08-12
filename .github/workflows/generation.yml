@@ -3,7 +3,7 @@ name: APIGenerator CI/CD Pipeline
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 1 * * 6' # Every Saturday at 1 AM UTC
+    - cron: '0 1 * * 0' # Every Sunday at 1 AM UTC
 
 jobs:
   build-and-run:
@@ -15,12 +15,12 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Setup .NET (multiple versions)
+    - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
     
-    - name: Add msbuild to PATH
+    - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
     
     - name: Create Repositories directory
@@ -97,24 +97,38 @@ jobs:
             # Find and restore packages for all .sln files
             Get-ChildItem -Filter "*.sln" -File | ForEach-Object {
               Write-Host "Restoring packages for $($_.Name)"
-              dotnet restore $_.Name
+              dotnet restore $_.Name 2>&1 | Tee-Object -Variable restoreOutput
+              Write-Host $restoreOutput
             }
             
             # Build all .sln files in the repository
             Get-ChildItem -Filter "*.sln" -File | ForEach-Object {
               Write-Host "Building $($_.Name) with dotnet build"
-              $result = dotnet build $_.Name --configuration Release --no-restore
+              dotnet build $_.Name --configuration Release --no-restore 2>&1 | Tee-Object -Variable buildOutput
+              Write-Host $buildOutput
+              
               if ($LASTEXITCODE -eq 0) {
                 Write-Host "✓ Successfully built $($_.Name) with dotnet build"
               } else {
-                Write-Host "✗ dotnet build failed for $($_.Name), trying MSBuild..."
+                Write-Host "✗ dotnet build failed for $($_.Name), trying MSBuild..." -ForegroundColor Yellow
+                Write-Host "dotnet build errors:" -ForegroundColor Red
+                Write-Host $buildOutput -ForegroundColor Red
+                
+                # Restore packages with MSBuild/NuGet
+                Write-Host "Restoring packages with MSBuild..."
+                msbuild $_.Name -t:Restore /p:Configuration=Release 2>&1 | Tee-Object -Variable restoreOutput
+                Write-Host $restoreOutput
                 
                 # Try with MSBuild as fallback
-                $msbuildResult = msbuild $_.Name /p:Configuration=Release /p:Platform="Any CPU" /m
+                msbuild $_.Name /p:Configuration=Release /p:Platform="Any CPU" /m 2>&1 | Tee-Object -Variable msbuildOutput
+                Write-Host $msbuildOutput
+                
                 if ($LASTEXITCODE -eq 0) {
                   Write-Host "✓ Successfully built $($_.Name) with MSBuild"
                 } else {
-                  Write-Error "✗ Both dotnet build and MSBuild failed for $($_.Name)"
+                  Write-Host "✗ Both dotnet build and MSBuild failed for $($_.Name)" -ForegroundColor Red
+                  Write-Host "MSBuild errors:" -ForegroundColor Red
+                  Write-Host $msbuildOutput -ForegroundColor Red
                   exit 1
                 }
               }
@@ -122,6 +136,29 @@ jobs:
           } finally {
             Pop-Location
           }
+        }
+      shell: pwsh
+    
+    - name: Clean docs/oM folder
+      run: |
+        $docsPath = "docs\oM"
+        if (Test-Path $docsPath) {
+          Write-Host "Found docs/oM folder, removing all subfolders and their content..."
+          
+          # Get all subdirectories in docs/oM
+          $subfolders = Get-ChildItem -Path $docsPath -Directory
+          
+          if ($subfolders.Count -gt 0) {
+            foreach ($folder in $subfolders) {
+              Write-Host "Removing subfolder: $($folder.Name)"
+              Remove-Item -Path $folder.FullName -Recurse -Force
+            }
+            Write-Host "✓ Successfully removed $($subfolders.Count) subfolders from docs/oM"
+          } else {
+            Write-Host "No subfolders found in docs/oM"
+          }
+        } else {
+          Write-Host "docs/oM folder not found, skipping cleanup"
         }
       shell: pwsh
     
@@ -137,16 +174,31 @@ jobs:
         
         # Restore packages
         Write-Host "Restoring packages for APIGenerator.sln"
-        dotnet restore "APIGenerator\APIGenerator.sln"
+        dotnet restore "APIGenerator\APIGenerator.sln" 2>&1 | Tee-Object -Variable restoreOutput
+        Write-Host $restoreOutput
         
         # Build the solution
         Write-Host "Building APIGenerator.sln with dotnet build"
-        $result = dotnet build "APIGenerator\APIGenerator.sln" --configuration Release --no-restore
+        dotnet build "APIGenerator\APIGenerator.sln" --configuration Release --no-restore 2>&1 | Tee-Object -Variable buildOutput
+        Write-Host $buildOutput
+        
         if ($LASTEXITCODE -ne 0) {
-          Write-Host "dotnet build failed, trying MSBuild..."
-          $msbuildResult = msbuild "APIGenerator\APIGenerator.sln" /p:Configuration=Release /p:Platform="Any CPU" /m
+          Write-Host "dotnet build failed, trying MSBuild..." -ForegroundColor Yellow
+          Write-Host "dotnet build errors:" -ForegroundColor Red
+          Write-Host $buildOutput -ForegroundColor Red
+          
+          # Restore packages with MSBuild
+          Write-Host "Restoring packages with MSBuild..."
+          msbuild "APIGenerator\APIGenerator.sln" -t:Restore /p:Configuration=Release 2>&1 | Tee-Object -Variable msbuildRestoreOutput
+          Write-Host $msbuildRestoreOutput
+          
+          msbuild "APIGenerator\APIGenerator.sln" /p:Configuration=Release /p:Platform="Any CPU" /m 2>&1 | Tee-Object -Variable msbuildOutput
+          Write-Host $msbuildOutput
+          
           if ($LASTEXITCODE -ne 0) {
-            Write-Error "Both dotnet build and MSBuild failed for APIGenerator.sln"
+            Write-Host "Both dotnet build and MSBuild failed for APIGenerator.sln" -ForegroundColor Red
+            Write-Host "MSBuild errors:" -ForegroundColor Red
+            Write-Host $msbuildOutput -ForegroundColor Red
             exit 1
           } else {
             Write-Host "✓ Successfully built APIGenerator.sln with MSBuild"
