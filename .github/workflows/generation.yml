@@ -23,6 +23,9 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
     
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v2.0.1
+    
     - name: Create Repositories directory
       run: mkdir Repositories
     
@@ -62,8 +65,7 @@ jobs:
               Write-Host "✓ Found .sln file in $repo_name - keeping repository"
               $repo_name | Add-Content "valid_repos.txt" -Encoding UTF8
             } else {
-              Write-Host "✗ No .sln file found in base folder of $repo_name - removing repository"
-              Remove-Item "Repositories\$repo_name" -Recurse -Force
+              Write-Host "✗ No .sln file found in base folder of $repo_name - Repo not built"
             }
           } catch {
             Write-Host "Failed to clone $repo_name"
@@ -116,8 +118,7 @@ jobs:
                 
                 # Restore packages with MSBuild/NuGet
                 Write-Host "Restoring packages with MSBuild..."
-                msbuild $_.Name -t:Restore /p:Configuration=Release 2>&1 | Tee-Object -Variable restoreOutput
-                Write-Host $restoreOutput
+                nuget restore $_.Name
                 
                 # Try with MSBuild as fallback
                 msbuild $_.Name /p:Configuration=Release /p:Platform="Any CPU" /m 2>&1 | Tee-Object -Variable msbuildOutput
