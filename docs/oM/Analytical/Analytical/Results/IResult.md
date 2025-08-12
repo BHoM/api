@@ -50,8 +50,6 @@ For expanded functionality, a result class should generally either implement the
     - BH.oM.Environment.Results.Mesh.[MeshElementResult](/api/oM/Analytical/Environment/Results/Mesh/MeshElementResult)
     - BH.oM.Environment.Results.Mesh.[MeshResult](/api/oM/Analytical/Environment/Results/Mesh/MeshResult)
     - BH.oM.Environment.Results.Illuminance.[Lux](/api/oM/Analytical/Environment/Results/Illuminance/Lux)
-    - BH.oM.Adapters.ETABS.Results.[SpandrelForce](/api/oM/Adapter/Adapters/ETABS/Results/SpandrelForce)
-    - BH.oM.Adapters.ETABS.Results.[PierForce](/api/oM/Adapter/Adapters/ETABS/Results/PierForce)
     - BH.oM.Humans.ViewQuality.[Avalue](/api/oM/Physical/Humans/ViewQuality/Results/Avalue)
     - BH.oM.Humans.ViewQuality.[Cvalue](/api/oM/Physical/Humans/ViewQuality/Results/Cvalue)
     - BH.oM.Humans.ViewQuality.[Evalue](/api/oM/Physical/Humans/ViewQuality/Results/Evalue)
@@ -97,7 +95,6 @@ For expanded functionality, a result class should generally either implement the
     - BH.oM.Lighting.Results.Mesh.[MeshElementResult](/api/oM/Analytical/Lighting/Results/Mesh/MeshElementResult)
     - BH.oM.Lighting.Results.Mesh.[MeshResult](/api/oM/Analytical/Lighting/Results/Mesh/MeshResult)
     - BH.oM.Lighting.Results.Illuminance.[Lux](/api/oM/Analytical/Lighting/Results/Illuminance/Lux)
-    - BH.oM.Adapters.SAP2000.Results.[AISCSteelUtilisation](/api/oM/Adapter/Adapters/SAP2000/Elements/AISCSteelUtilisation)
     - BH.oM.Search.[SearchResult](/api/oM/Framework/Search/SearchResult)&lt;[T](/api/oM/Framework/Search/SearchResult#t)&gt;
     - BH.oM.Structure.Results.[BarDeformation](/api/oM/Analytical/Structure/Results/Bar Results/BarDeformation)
     - BH.oM.Structure.Results.[BarDisplacement](/api/oM/Analytical/Structure/Results/Bar Results/BarDisplacement)
@@ -166,16 +163,3 @@ The C# interface definition is available on github:
 - [IResult.cs](https://github.com/BHoM/BHoM/blob/develop/Analytical_oM/Results\IResult.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Analytical_oM/Results/IResult.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [IResult.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Analytical_oM/Results/IResult.json)

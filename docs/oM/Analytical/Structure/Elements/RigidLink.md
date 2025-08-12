@@ -51,7 +51,6 @@ The following properties are defined as extension methods in one of the BHoM_Eng
 | Name             | Type             | Description      | Quantity         | Engine           |
 |------------------|------------------|------------------|------------------|------------------|
 | Geometry | [IGeometry](/api/oM/Dimensional/Geometry/Interface/IGeometry) | Gets the geometry of a RigidLink as a list of lines between the primary node and the secondary nodes. Method required for automatic display in UI packages. | - | Structure_Engine |
-| SplitRigidLink | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[RigidLink](/api/oM/Analytical/Structure/Elements/RigidLink)&gt; | Splits a RigidLink into one or more RigidLinks, each of which has exactly one SecondaryNode. | - | SAP2000_Engine |
 
 
 ## Code and Schema
@@ -69,16 +68,3 @@ The C# class definition is available on github:
 - [RigidLink.cs](https://github.com/BHoM/BHoM/blob/develop/Structure_oM/Elements\RigidLink.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Structure_oM/Elements/RigidLink.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [RigidLink.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Structure_oM/Elements/RigidLink.json)

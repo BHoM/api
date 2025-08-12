@@ -20,7 +20,6 @@ Settings to determine the uniqueness of an Object, i.e. when comparing and when 
 ???+ bhom "The following classes are inheriting from this class:"
 
     - BH.oM.Base.[ComparisonConfig](/api/oM/Framework/Base/ComparisonConfig)
-    - BH.oM.Adapters.Revit.[RevitComparisonConfig](/api/oM/Adapter/Adapters/Revit/Config/RevitComparisonConfig)
 
 
 ## Properties
@@ -63,16 +62,3 @@ The C# abstract class definition is available on github:
 - [BaseComparisonConfig.cs](https://github.com/BHoM/BHoM/blob/develop/BHoM/BaseComparisonConfig.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/BHoM/BaseComparisonConfig.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [BaseComparisonConfig.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/BHoM/BaseComparisonConfig.json)

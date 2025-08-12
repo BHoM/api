@@ -100,19 +100,6 @@ The following properties are inherited from the base class of the object
 | CustomData | [Dictionary](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2?view=netstandard-2.0)&lt;[string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0), [object](https://learn.microsoft.com/en-us/dotnet/api/System.Object?view=netstandard-2.0)&gt; | - | - |
 
 
-### Derived properties
-
-The following properties are defined as extension methods in one of the BHoM_Engines
-
-| Name             | Type             | Description      | Quantity         | Engine           |
-|------------------|------------------|------------------|------------------|------------------|
-| ATotal | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Gets the total sum of values from all A-modules (A1-A5) with a set value (all values not NaN). | - | LifeCycleAssessment_Engine |
-| BTotal | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Gets the total sum of values from all B-modules (B1-B7) with a set value (all values not NaN). | - | LifeCycleAssessment_Engine |
-| CTotal | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Gets the total sum of values from all C-modules (C1-C4) with a set value (all values not NaN). | - | LifeCycleAssessment_Engine |
-| IMetricType | [MetricType](/api/oM/Analytical/LifeCycleAssessment/Enums/MetricType) | - | - | LifeCycleAssessment_Engine |
-| Total | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Gets the total sum of values from all modules with a set value (all values not NaN). | - | LifeCycleAssessment_Engine |
-
-
 ## Code and Schema
 
 ### C# implementation
@@ -134,16 +121,3 @@ The C# class definition is available on github:
 - [ClimateChangeFossilMetric.cs](https://github.com/BHoM/BHoM/blob/develop/LifeCycleAssessment_oM/MaterialFragments\EnvironmentalMetrics\ClimateChangeFossilMetric.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/LifeCycleAssessment_oM/MaterialFragments/ClimateChangeFossilMetric.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [ClimateChangeFossilMetric.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/LifeCycleAssessment_oM/MaterialFragments/ClimateChangeFossilMetric.json)

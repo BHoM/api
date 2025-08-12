@@ -46,7 +46,6 @@ title: IAnalytical
     - BH.oM.Facade.Elements.[FrameEdge](/api/oM/Analytical/Facade/Elements/FrameEdge)
     - BH.oM.Facade.Elements.[Opening](/api/oM/Analytical/Facade/Elements/Opening)
     - BH.oM.Facade.Elements.[Panel](/api/oM/Analytical/Facade/Elements/Panel)
-    - BH.oM.Adapters.GSA.Elements.[Spacer](/api/oM/Adapter/Adapters/GSA/Elements/Spacer)
     - BH.oM.Lighting.Analysis.[Node](/api/oM/Analytical/Lighting/Analysis/Node)
     - BH.oM.MEP.System.[Node](/api/oM/Analytical/MEP/System/Node)
     - BH.oM.Structure.Reinforcement.[ReinforcementRegion](/api/oM/Analytical/Structure/Reinforcement/ReinforcementRegion)
@@ -79,16 +78,3 @@ The C# interface definition is available on github:
 - [IAnalytical.cs](https://github.com/BHoM/BHoM/blob/develop/Analytical_oM/IAnalytical.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Analytical_oM/IAnalytical.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [IAnalytical.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Analytical_oM/IAnalytical.json)

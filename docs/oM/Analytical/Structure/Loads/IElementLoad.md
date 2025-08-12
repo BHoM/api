@@ -31,8 +31,6 @@ Constrained by the following arguments:
 
 ???+ bhom "The following classes are implementing this interface:"
 
-    - BH.oM.Adapters.RFEM6.IntermediateDatastructure.Geometry.[RFEMFreeLineLoad](/api/oM/Adapter/Adapters/RFEM6/IntermediateDatastructure/Loading/RFEMFreeLineLoad)
-    - BH.oM.Adapters.RFEM6.IntermediateDatastructure.Geometry.[RFEMNonFreeLineLoad](/api/oM/Adapter/Adapters/RFEM6/IntermediateDatastructure/Loading/RFEMNonFreeLineLoad)
     - BH.oM.Structure.Loads.[AreaDifferentialTemperatureLoad](/api/oM/Analytical/Structure/Loads/AreaDifferentialTemperatureLoad)
     - BH.oM.Structure.Loads.[AreaUniformlyDistributedLoad](/api/oM/Analytical/Structure/Loads/AreaUniformlyDistributedLoad)
     - BH.oM.Structure.Loads.[AreaUniformTemperatureLoad](/api/oM/Analytical/Structure/Loads/AreaUniformTemperatureLoad)
@@ -88,16 +86,3 @@ The C# interface definition is available on github:
 - [IElementLoad.cs](https://github.com/BHoM/BHoM/blob/develop/Structure_oM/Loads\IElementLoad.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Structure_oM/Loads/IElementLoad`1.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [IElementLoad`1.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Structure_oM/Loads/IElementLoad`1.json)

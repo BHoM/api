@@ -37,15 +37,6 @@ The following properties are defined on the class
 | VolumetricFlowRate | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Total VolumetricFlowRate associated with the material. Applicable for takeoffs of elements relating to flow of substance through the element. | [VolumetricFlowRate](/api/oM/Dimensional/Quantities/Attributes/VolumetricFlowRate) [m³/s] |
 
 
-### Derived properties
-
-The following properties are defined as extension methods in one of the BHoM_Engines
-
-| Name             | Type             | Description      | Quantity         | Engine           |
-|------------------|------------------|------------------|------------------|------------------|
-| EnvironmentalResults | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[MaterialResult](/api/oM/Analytical/LifeCycleAssessment/Results/MaterialResults/MaterialResult)&gt; | Evaluates the materials in the VolumetricMaterialTakeoff and returns a MaterialResult per material in the takeoff. Requires the materials in the Takeoff to have EPDs assigned. Please use the AssignTemplate methods before calling this method. | - | LifeCycleAssessment_Engine |
-
-
 ## Code and Schema
 
 ### C# implementation
@@ -61,16 +52,3 @@ The C# class definition is available on github:
 - [TakeoffItem.cs](https://github.com/BHoM/BHoM/blob/develop/Physical_oM/Materials\TakeoffItem.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Physical_oM/Materials/TakeoffItem.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [TakeoffItem.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Physical_oM/Materials/TakeoffItem.json)

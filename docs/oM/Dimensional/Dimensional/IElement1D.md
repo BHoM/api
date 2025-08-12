@@ -47,7 +47,6 @@ Enables geometrical operations to be performed on a Curve based spatial element,
     - BH.oM.Geometry.[PolyCurve](/api/oM/Dimensional/Geometry/Curve/PolyCurve)
     - BH.oM.Geometry.[Polygon](/api/oM/Dimensional/Geometry/Curve/Polygon)
     - BH.oM.Geometry.[Polyline](/api/oM/Dimensional/Geometry/Curve/Polyline)
-    - BH.oM.Adapters.GSA.Elements.[Spacer](/api/oM/Adapter/Adapters/GSA/Elements/Spacer)
     - BH.oM.MEP.System.[CableTray](/api/oM/Analytical/MEP/System/CableTray)
     - BH.oM.MEP.System.[Duct](/api/oM/Analytical/MEP/System/Duct)
     - BH.oM.MEP.System.[FlowSystem](/api/oM/Analytical/MEP/System/FlowSystem)
@@ -109,16 +108,3 @@ The C# interface definition is available on github:
 - [IElement1D.cs](https://github.com/BHoM/BHoM/blob/develop/Dimensional_oM/IElement1D.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Dimensional_oM/IElement1D.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [IElement1D.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Dimensional_oM/IElement1D.json)

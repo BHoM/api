@@ -15,13 +15,6 @@ Identifies Container objects that can contain other interrelated objects in mult
     -  BH.oM.Base.[IObject](/api/oM/Framework/Base/Interface/IObject)
 
 
-### Classes implementing this interface
-
-???+ bhom "The following classes are implementing this interface:"
-
-    - BH.oM.Karamba3D.[FemModel](/api/oM/Adapter/Karamba3D/FemModel)
-
-
 ## Properties
 
 ### Derived properties
@@ -48,16 +41,3 @@ The C# interface definition is available on github:
 - [IContainer.cs](https://github.com/BHoM/BHoM/blob/develop/BHoM/Interface\IContainer.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/BHoM/IContainer.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [IContainer.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/BHoM/IContainer.json)

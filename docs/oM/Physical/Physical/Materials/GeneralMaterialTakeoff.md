@@ -48,7 +48,6 @@ The following properties are defined as extension methods in one of the BHoM_Eng
 
 | Name             | Type             | Description      | Quantity         | Engine           |
 |------------------|------------------|------------------|------------------|------------------|
-| EnvironmentalResults | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[MaterialResult](/api/oM/Analytical/LifeCycleAssessment/Results/MaterialResults/MaterialResult)&gt; | Evaluates the materials in the VolumetricMaterialTakeoff and returns a MaterialResult per material in the takeoff. Requires the materials in the Takeoff to have EPDs assigned. Please use the AssignTemplate methods before calling this method. | - | LifeCycleAssessment_Engine |
 | SolidVolume | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Returns the total solid volume of the provided GeneralMaterialTakeoff. | [Volume](/api/oM/Dimensional/Quantities/Attributes/Volume) [m³] | Matter_Engine |
 
 
@@ -67,16 +66,3 @@ The C# class definition is available on github:
 - [GeneralMaterialTakeoff.cs](https://github.com/BHoM/BHoM/blob/develop/Physical_oM/Materials\GeneralMaterialTakeoff.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Physical_oM/Materials/GeneralMaterialTakeoff.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [GeneralMaterialTakeoff.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Physical_oM/Materials/GeneralMaterialTakeoff.json)

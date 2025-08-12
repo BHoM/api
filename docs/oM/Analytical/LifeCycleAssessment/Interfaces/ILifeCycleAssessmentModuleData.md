@@ -110,15 +110,6 @@ The following properties are defined on the interface
 | Indicators | [T](#t) | Set of indicators per module. | - |
 
 
-### Derived properties
-
-The following properties are defined as extension methods in one of the BHoM_Engines
-
-| Name             | Type             | Description      | Quantity         | Engine           |
-|------------------|------------------|------------------|------------------|------------------|
-| IMetricType | [MetricType](/api/oM/Analytical/LifeCycleAssessment/Enums/MetricType) | - | - | LifeCycleAssessment_Engine |
-
-
 ## Code and Schema
 
 ### C# implementation

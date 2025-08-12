@@ -71,7 +71,6 @@ The following properties are defined as extension methods in one of the BHoM_Eng
 | IGeometry | [ICurve](/api/oM/Dimensional/Geometry/Curve/ICurve) | Queries the defining geometrical object which all spatial operations will act on. | - | Spatial_Engine |
 | IIsPlanar | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | Checks whether all control points of an element lie in a single plane. | - | Spatial_Engine |
 | IIsSelfIntersecting | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | Checks if any of the curves defining an IElement is closer to itself than the tolerance at any two points (is self intersecting). In case of IElement2D, does not check for intersections between external and internal curves, or between different internal curves. | - | Spatial_Engine |
-| InvalidEdge | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | - | - | Lusas_Engine |
 | IPrimaryPropertyName | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Returns the name of an elements primary defining property | - | Facade_Engine |
 | IsNull | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | Checks if a Edge or its defining properties are null and outputs relevant error message. | - | Structure_Engine |
 | IsPlanar | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | Checks whether all control points of an element lie in a single plane. | - | Spatial_Engine |
@@ -101,75 +100,3 @@ The C# class definition is available on github:
 - [Edge.cs](https://github.com/BHoM/BHoM/blob/develop/Structure_oM/Elements\Edge.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Structure_oM/Elements/Edge.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [Edge.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Structure_oM/Elements/Edge.json)
-### Example JSON instance
-
-Example JSON instance of type Edge.
-
-``` json title="Example JSON"
-{
-  "_t": "BH.oM.Structure.Elements.Edge",
-  "Curve": {
-    "_t": "BH.oM.Geometry.Line",
-    "Start": {
-      "_t": "BH.oM.Geometry.Point",
-      "X": -4.0,
-      "Y": 2.0,
-      "Z": 0.0
-    },
-    "End": {
-      "_t": "BH.oM.Geometry.Point",
-      "X": -1.0,
-      "Y": 2.0,
-      "Z": 0.0
-    },
-    "Infinite": false
-  },
-  "Release": {
-    "_t": "BH.oM.Structure.Constraints.Constraint4DOF",
-    "Name": null,
-    "TranslationX": "Free",
-    "TranslationY": "Free",
-    "TranslationZ": "Free",
-    "RotationX": "Free",
-    "TranslationalStiffnessX": 0.0,
-    "TranslationalStiffnessY": 0.0,
-    "TranslationalStiffnessZ": 0.0,
-    "RotationalStiffnessX": 0.0,
-    "BHoM_Guid": "98240133-10c8-42bb-8f2d-62a25eddd727"
-  },
-  "Support": {
-    "_t": "BH.oM.Structure.Constraints.Constraint6DOF",
-    "Name": null,
-    "TranslationalStiffnessX": 0.0,
-    "TranslationalStiffnessY": 0.0,
-    "TranslationalStiffnessZ": 0.0,
-    "RotationalStiffnessX": 0.0,
-    "RotationalStiffnessY": 0.0,
-    "RotationalStiffnessZ": 0.0,
-    "TranslationX": "Free",
-    "TranslationY": "Free",
-    "TranslationZ": "Free",
-    "RotationX": "Free",
-    "RotationY": "Free",
-    "RotationZ": "Free",
-    "BHoM_Guid": "454affc3-0278-43d4-aebc-cac58138507e"
-  },
-  "BHoM_Guid": "99a1b32b-a114-4907-b49b-c8742f44ead8",
-  "Name": "Edge Name",
-  "_bhomVersion": "8.2"
-}
-```
-

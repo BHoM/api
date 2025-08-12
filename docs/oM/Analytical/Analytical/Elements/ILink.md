@@ -33,7 +33,6 @@ Constrained by the following arguments:
 
 ???+ bhom "The following classes are implementing this interface:"
 
-    - BH.oM.Adapters.GSA.Elements.[Spacer](/api/oM/Adapter/Adapters/GSA/Elements/Spacer)
     - BH.oM.Structure.Elements.[Bar](/api/oM/Analytical/Structure/Elements/Bar)
 
 
@@ -100,16 +99,3 @@ The C# interface definition is available on github:
 - [ILink.cs](https://github.com/BHoM/BHoM/blob/develop/Analytical_oM/Elements\ILink.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Analytical_oM/Elements/ILink`1.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [ILink`1.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Analytical_oM/Elements/ILink`1.json)

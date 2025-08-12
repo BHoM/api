@@ -34,7 +34,6 @@ Interface to be added to IMaterialProperties the specifies the density of the Ma
 
     - BH.oM.Environment.MaterialFragments.[GasMaterial](/api/oM/Analytical/Environment/MaterialFragments/GasMaterial)
     - BH.oM.Environment.MaterialFragments.[SolidMaterial](/api/oM/Analytical/Environment/MaterialFragments/SolidMaterial)
-    - BH.oM.Adapters.GSA.MaterialFragments.[Fabric](/api/oM/Adapter/Adapters/GSA/MaterialFragments/Fabric)
     - BH.oM.Structure.MaterialFragments.[Aluminium](/api/oM/Analytical/Structure/MaterialFragments/Aluminium)
     - BH.oM.Structure.MaterialFragments.[Concrete](/api/oM/Analytical/Structure/MaterialFragments/Concrete)
     - BH.oM.Structure.MaterialFragments.[GenericIsotropicMaterial](/api/oM/Analytical/Structure/MaterialFragments/GenericIsotropicMaterial)
@@ -75,16 +74,3 @@ The C# interface definition is available on github:
 - [IDensityProvider.cs](https://github.com/BHoM/BHoM/blob/develop/Physical_oM/Materials\IDensityProvider.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Physical_oM/Materials/IDensityProvider.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [IDensityProvider.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Physical_oM/Materials/IDensityProvider.json)

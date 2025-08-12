@@ -60,7 +60,6 @@ The following properties are defined as extension methods in one of the BHoM_Eng
 | Name             | Type             | Description      | Quantity         | Engine           |
 |------------------|------------------|------------------|------------------|------------------|
 | IDataTypePerParam | [Dictionary](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2?view=netstandard-2.0)&lt;[Guid](https://learn.microsoft.com/en-us/dotnet/api/System.Guid?view=netstandard-2.0), [Type](https://learn.microsoft.com/en-us/dotnet/api/System.Type?view=netstandard-2.0)&gt; | Collect the data type for each parameter in the input syntax node. | - | Programming_Engine |
-| IReturnType | TypeSyntax | Get the C# type syntax corresponding to the first output of a node. | - | CSharp_Engine |
 
 
 ## Code and Schema
@@ -78,16 +77,3 @@ The C# interface definition is available on github:
 - [INode.cs](https://github.com/BHoM/BHoM/blob/develop/Programming_oM/Nodes\INode.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Programming_oM/INode.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [INode.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Programming_oM/INode.json)

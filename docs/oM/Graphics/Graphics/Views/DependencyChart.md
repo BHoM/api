@@ -60,16 +60,3 @@ The C# class definition is available on github:
 - [DependencyChart.cs](https://github.com/BHoM/BHoM/blob/develop/Graphics_oM/Views\DependencyChart.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Graphics_oM/Views/DependencyChart.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [DependencyChart.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Graphics_oM/Views/DependencyChart.json)

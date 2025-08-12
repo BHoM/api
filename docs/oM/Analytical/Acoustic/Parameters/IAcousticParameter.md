@@ -56,16 +56,3 @@ The C# interface definition is available on github:
 - [IAcousticParameter.cs](https://github.com/BHoM/BHoM/blob/develop/Acoustic_oM/Parameters\IAcousticParameter.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Acoustic_oM/IAcousticParameter.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [IAcousticParameter.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Acoustic_oM/IAcousticParameter.json)

@@ -69,7 +69,6 @@ The common base interface for all the Spatial Dimensional Objects.This interface
     - BH.oM.Geometry.[PlanarSurface](/api/oM/Dimensional/Geometry/Surface/PlanarSurface)
     - BH.oM.Geometry.[Point](/api/oM/Dimensional/Geometry/Vector/Point)
     - BH.oM.Graphics.[RenderPoint](/api/oM/Graphics/Graphics/Render/RenderPoint)
-    - BH.oM.Adapters.GSA.Elements.[Spacer](/api/oM/Adapter/Adapters/GSA/Elements/Spacer)
     - BH.oM.Lighting.Elements.[Luminaire](/api/oM/Analytical/Lighting/Elements/Luminaire)
     - BH.oM.Lighting.Analysis.[Node](/api/oM/Analytical/Lighting/Analysis/Node)
     - BH.oM.MEP.System.[CableTray](/api/oM/Analytical/MEP/System/CableTray)
@@ -148,16 +147,3 @@ The C# interface definition is available on github:
 - [IElement.cs](https://github.com/BHoM/BHoM/blob/develop/Dimensional_oM/IElement.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Dimensional_oM/IElement.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [IElement.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Dimensional_oM/IElement.json)

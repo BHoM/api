@@ -19,14 +19,6 @@ Distributed load to be applied over a line.
     -  BH.oM.Structure.Loads.[ILoad](/api/oM/Analytical/Structure/Loads/ILoad)
 
 
-### Classes inheriting from this class
-
-???+ bhom "The following classes are inheriting from this class:"
-
-    - BH.oM.Adapters.RFEM6.IntermediateDatastructure.Geometry.[RFEMFreeLineLoad](/api/oM/Adapter/Adapters/RFEM6/IntermediateDatastructure/Loading/RFEMFreeLineLoad)
-    - BH.oM.Adapters.RFEM6.IntermediateDatastructure.Geometry.[RFEMNonFreeLineLoad](/api/oM/Adapter/Adapters/RFEM6/IntermediateDatastructure/Loading/RFEMNonFreeLineLoad)
-
-
 ## Properties
 
 
@@ -90,16 +82,3 @@ The C# class definition is available on github:
 - [GeometricalLineLoad.cs](https://github.com/BHoM/BHoM/blob/develop/Structure_oM/Loads\GeometricalLineLoad.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Structure_oM/Loads/GeometricalLineLoad.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [GeometricalLineLoad.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Structure_oM/Loads/GeometricalLineLoad.json)

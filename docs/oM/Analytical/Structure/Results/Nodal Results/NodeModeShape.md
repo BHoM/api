@@ -100,16 +100,3 @@ The C# class definition is available on github:
 - [NodeModeShape.cs](https://github.com/BHoM/BHoM/blob/develop/Structure_oM/Results\Nodal Results\NodeModeShape.cs)
 
 All history and changes of the class can be found by inspection the history.
-### JSON Schema implementation
-
-The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
-
-``` json title="JSON Schema"
-{
- "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/Structure_oM/Results/NodeModeShape.json"
-}
-```
-
-The JSON Schema is available on github here:
-
-- [NodeModeShape.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/Structure_oM/Results/NodeModeShape.json)

@@ -31,15 +31,6 @@ The following properties are defined on the class
 | Value | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Value for this single factor indicator. | [PhotochemicalOzoneCreationCMLPerQuantity](/api/oM/Dimensional/Quantities/Attributes/PhotochemicalOzoneCreationCMLPerQuantity) [kg C₂H₄ eq per unit] |
 
 
-### Derived properties
-
-The following properties are defined as extension methods in one of the BHoM_Engines
-
-| Name             | Type             | Description      | Quantity         | Engine           |
-|------------------|------------------|------------------|------------------|------------------|
-| IMetricType | [MetricType](/api/oM/Analytical/LifeCycleAssessment/Enums/MetricType) | - | - | LifeCycleAssessment_Engine |
-
-
 ## Code and Schema
 
 ### C# implementation
