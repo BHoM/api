@@ -5,9 +5,11 @@ using SchemaDocumentationGenerator;
 using System.Collections.Generic;
 using System.Reflection;
 
-Console.WriteLine("Loading Settings.");
+string rootFolder = Path.Combine(Environment.CurrentDirectory.Split("APIGenerator")[0]); //Assumes the git folder is in the parent directory of the APIGenerator folder
+Console.WriteLine($"Root folder: {rootFolder}");
 
-Settings.LoadSettings(Path.Join(Environment.CurrentDirectory, "oM_categorisation.csv"));
+Console.WriteLine("Loading Settings.");
+Settings.LoadSettings(Path.Combine(rootFolder, "APIGenerator", "APIGenerator", "oM_categorisation.csv"));
 
 Console.WriteLine("Loading Engine assemblies.");
 List<Assembly> engineAssemblies = AssemblyLoader.LoadAllEngineAssemblies(new List<string> { "BHoM" });
@@ -25,8 +27,6 @@ foreach (Assembly assembly in oMAssemblies)
         TypeToMarkdown.MapDependecies(type);
     }
 }
-
-string rootFolder = Path.Combine(Environment.CurrentDirectory.Split("APIGenerator")[0]); // Assumes the git folder is in the parent directory of the APIGenerator folder
 
 TypeToMarkdown.SetupAssemblyFolders(rootFolder, oMAssemblies);
 
