@@ -1,7 +1,7 @@
 ﻿
 
 using BH.oM.Base;
-using SchemaDocumentationGenerator;
+using APIGenerator;
 using System.Collections.Generic;
 using System.Reflection;
 

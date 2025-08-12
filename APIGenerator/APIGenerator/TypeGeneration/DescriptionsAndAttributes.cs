@@ -10,7 +10,7 @@ using BH.oM.Base;
 using BH.oM.Base.Attributes;
 using BH.oM.Quantities.Attributes;
 
-namespace SchemaDocumentationGenerator
+namespace APIGenerator
 {
     public static partial class TypeToMarkdown
     {

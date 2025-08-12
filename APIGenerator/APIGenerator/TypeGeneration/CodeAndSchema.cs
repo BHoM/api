@@ -10,20 +10,20 @@ using BH.oM.Base;
 using BH.oM.Base.Attributes;
 using BH.oM.Quantities.Attributes;
 
-namespace SchemaDocumentationGenerator
+namespace APIGenerator
 {
     public static partial class TypeToMarkdown
     {
 
         /***************************************************/
 
-        private static string Links(this Type type)
+        private static string Links(this Type type, string basePath)
         {
             string classWord = type.TypeWord();
 
             string markdown = "## Code and Schema\n\n";
             markdown += CSharpSection(type, classWord);
-            string jsonSchema = JsonSchemaSection(type, classWord);
+            string jsonSchema = JsonSchemaSection(type, classWord, basePath);
             if(jsonSchema != null)
                 markdown += jsonSchema;
 
@@ -63,7 +63,7 @@ namespace SchemaDocumentationGenerator
 
         /***************************************************/
 
-        private static string JsonSchemaSection(Type type, string classWord)
+        private static string JsonSchemaSection(Type type, string classWord, string basePath)
         {
 
             var (id, link) = JsonSchemaLink(type);
@@ -84,7 +84,7 @@ namespace SchemaDocumentationGenerator
             markdown += "The JSON Schema is available on github here:\n\n";
             markdown += $"- [{type.Name}.json]({link})\n";
 
-            string json = TryGetExampleJson(type);
+            string json = TryGetExampleJson(type, basePath);
 
             if (json != null)
             {
@@ -104,20 +104,9 @@ namespace SchemaDocumentationGenerator
 
         /***************************************************/
 
-        public static string TryGetExampleJson(this Type type)
+        public static string TryGetExampleJson(this Type type, string basePath)
         {
-            string executionPath = Environment.ProcessPath;
-            string[] split = executionPath.Split(Path.DirectorySeparatorChar);
-
-            string basePath = "";
-
-            for (int i = 0; i < split.Length; i++)
-            {
-                basePath += split[i] + Path.DirectorySeparatorChar;
-                if (split[i] == "SchemaDocumentationGenerator")
-                    break;
-            }
-            basePath = Path.Combine(basePath, "SchemaDocumentationGenerator", "JsonExamples");
+            basePath = Path.Combine(basePath, "APIGenerator", "APIGenerator", "JsonExamples");
 
             string dir = Path.Combine(basePath, type.Assembly.GetName().Name);
             if (!Directory.Exists(dir))

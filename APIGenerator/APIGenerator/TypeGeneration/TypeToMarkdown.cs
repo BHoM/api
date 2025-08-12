@@ -11,7 +11,7 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchemaDocumentationGenerator
+namespace APIGenerator
 {
     public static partial class TypeToMarkdown
     {
@@ -92,7 +92,7 @@ namespace SchemaDocumentationGenerator
 
             }
 
-            markdown += Links(type);
+            markdown += Links(type, basePath);
 
             Write(filePath, markdown);
 
