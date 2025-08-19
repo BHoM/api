@@ -49,7 +49,7 @@ The following properties are defined as extension methods in one of the BHoM_Eng
 
 | Name             | Type             | Description      | Quantity         | Engine           |
 |------------------|------------------|------------------|------------------|------------------|
-| Bounds | [BoundingBox](/api/oM/Dimensional/Geometry/Misc/BoundingBox) | Returns the BoundingBox the SVGDocuments which is the Canvas. | - | Graphics_Engine |
+| Bounds | [BoundingBox](/api/oM/Dimensional/Geometry/Misc/BoundingBox) | Returns the BoundingBox of the SVGDocument which is the Canvas. | - | Graphics_Engine |
 
 
 ## Code and Schema

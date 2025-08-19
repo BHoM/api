@@ -50,7 +50,7 @@ The following properties are defined as extension methods in one of the BHoM_Eng
 
 | Name             | Type             | Description      | Quantity         | Engine           |
 |------------------|------------------|------------------|------------------|------------------|
-| Absorptance | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Returns the absorptance of a material calculated as 1 minus the maximum emissivity (external and internal) | - | Environment_Engine |
+| Absorptance | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Returns the absorptance of a material calculated as 1 minus the maximum emissivity (external and internal). | - | Environment_Engine |
 | AllDensitiesEqual | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | Checks the density on all IDensityProviders on the material has the same density as the density on the Material within given tolerance. Returns false if the density is unset (NaN) on the material or any of its properties. | - | Matter_Engine |
 | Density | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Returns the density of a Material. | [Density](/api/oM/Dimensional/Quantities/Attributes/Density) [kg/m³] | Matter_Engine |
 | ExternalPolyline | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[Polyline](/api/oM/Dimensional/Geometry/Curve/Polyline)&gt; | Returns the External Polyline representation of a physical object (e.g. wall or window). | - | Physical_Engine |
@@ -58,7 +58,7 @@ The following properties are defined as extension methods in one of the BHoM_Eng
 | IsTransparent | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | Determines whether a material is transparent or not | - | Environment_Engine |
 | IsValidStructural | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | Checks if a physical Material contains exactly one structural material fragment, i.e. checks if the Material contains structural data. | - | Structure_Engine |
 | Polyline | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[Polyline](/api/oM/Dimensional/Geometry/Curve/Polyline)&gt; | Returns a Polyline representation of a physical object (e.g. wall or window). | - | Physical_Engine |
-| Roughness | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Returns the numerical roughness of a material | - | Environment_Engine |
+| Roughness | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Returns the numerical roughness of a material. | - | Environment_Engine |
 | StructuralMaterialFragment | [IMaterialFragment](/api/oM/Analytical/Structure/MaterialFragments/IMaterialFragment) | Checks if the physical Material contains a single structural MaterialFragment, and if it does returns this fragment, containing all relevant structural material data. Returns null if not exactly one structural MaterialFragment is found. | - | Structure_Engine |
 
 
