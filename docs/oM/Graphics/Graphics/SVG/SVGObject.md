@@ -49,7 +49,7 @@ The following properties are defined as extension methods in one of the BHoM_Eng
 
 | Name             | Type             | Description      | Quantity         | Engine           |
 |------------------|------------------|------------------|------------------|------------------|
-| Bounds | [BoundingBox](/api/oM/Dimensional/Geometry/Misc/BoundingBox) | Computes and returns the BoundingBox the SVGObject which is the concatenated BoudingBox of all Shapes contained within the object. | - | Graphics_Engine |
+| Bounds | [BoundingBox](/api/oM/Dimensional/Geometry/Misc/BoundingBox) | Computes and returns the BoundingBox of the SVGObject which is the concatenated BoundingBox of all Shapes contained within the object. | - | Graphics_Engine |
 
 
 ## Code and Schema

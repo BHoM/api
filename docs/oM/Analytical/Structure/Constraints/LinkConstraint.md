@@ -60,7 +60,7 @@ The following properties are defined as extension methods in one of the BHoM_Eng
 
 | Name             | Type             | Description      | Quantity         | Engine           |
 |------------------|------------------|------------------|------------------|------------------|
-| Description | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Generates a default description for the LinkConstraint based on its fixities where x denoted fixed and f denotes free. | - | Structure_Engine |
+| Description | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Generates a default description for the LinkConstraint based on its fixities where 'x' denotes fixed and 'f' denotes free. | - | Structure_Engine |
 | DescriptionOrName | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Gets the name from a IProperty. If null or empty, a default description name is provided instead. | - | Structure_Engine |
 | IDescription | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Generates a default description for the IProperty, based on its properties. | - | Structure_Engine |
 

@@ -34,6 +34,25 @@ The following properties are defined on the class
 | ID | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Machine readable identifier for the Test Result. | - |
 
 
+### Derived properties
+
+The following properties are defined as extension methods in one of the BHoM_Engines
+
+| Name             | Type             | Description      | Quantity         | Engine           |
+|------------------|------------------|------------------|------------------|------------------|
+| ExceptionProperties | [Output](/api/oM/Framework/Base/Output)&lt;[List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0)&gt;, [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0)&gt;, [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0)&gt;&gt; | Finds all properties reported and dispatches to output corresponding to error, warning and passes. | - | InteroperabilityTest_Engine |
+| ExceptionProperties | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Finds all properties reported and groups them by status level and returns a string containing all reported properties. | - | InteroperabilityTest_Engine |
+| FullMessage | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Returns a full concatenated message for a test result and its inner result to the target max depth, only giving messages worse or equal to the provided severity level. | - | Test_Engine |
+| IFullMessage | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | - | - | Test_Engine |
+| INewResultAfterCrashFix | [ITestInformation](/api/oM/Framework/Test/ITestInformation) | Gets a ITestInformation back that correspond to a situation where the reference data was showing a crash no longer present.<br>Used when comparing to TestResults against each other and information in the reference can not be found in the new data. | - | InteroperabilityTest_Engine |
+| INoReferenceFound | [ITestInformation](/api/oM/Framework/Test/ITestInformation) | Gets a ITestInformation back that correspond to no reference data was available that matching the result.<br>Used when comparing to TestResults against each other and information in the reference can not be found in the new data. | - | InteroperabilityTest_Engine |
+| IOnlyReferenceFound | [ITestInformation](/api/oM/Framework/Test/ITestInformation) | Gets a TestInformation result back that correspond to an information only found in the reference set when compared to data just run.<br>Used when comparing to TestResults against each other and information in the reference can not be found in the new data. | - | InteroperabilityTest_Engine |
+| NewResultAfterCrashFix | [TestResult](/api/oM/Framework/Test/Results/TestResult) | Gets a ComparisonDifference back that correspond to a situation where the reference data was showing a crash no longer present.<br>Used when comparing to TestResults against each other and information in the reference can not be found in the new data.<br>This is generally a good situation, but the data now able to be pushed needs to be validated.<br>Recursivly adds any inner TestInformation as NewResultAfterCrashFix. | - | InteroperabilityTest_Engine |
+| NonEventMessageInformation | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[ITestInformation](/api/oM/Framework/Test/ITestInformation)&gt; | Gets all inner information from the result that is not null and not of type EventMessage. Used for recursive comparison between two TestResults. | - | InteroperabilityTest_Engine |
+| NoReferenceFound | [TestResult](/api/oM/Framework/Test/Results/TestResult) | Gets a TestResult back that correspond to no reference data was available that matching the result.<br>Used when comparing to TestResults against each other and information in the reference can not be found in the new data.<br>Recursivly adds any inner TestInformation as no reference found. | - | InteroperabilityTest_Engine |
+| OnlyReferenceFound | [TestResult](/api/oM/Framework/Test/Results/TestResult) | Gets a TestResult result back that correspond to an information only found in the reference set when compared to data just run.<br>Used when comparing to TestResults against each other and information in the reference can not be found in the new data.<br>Recursivly adds any inner TestInformation as data only found in reference. | - | InteroperabilityTest_Engine |
+
+
 ## Code and Schema
 
 ### C# implementation
