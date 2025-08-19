@@ -1,0 +1,9 @@
+# Global code owners for all files in this repository
+# These users will be automatically requested for review on all PRs
+
+* @IsakNaslundBH @pawelbaran @adecler @michaelhoehn
+
+# Specific patterns can be added here if needed
+# For example:
+# /docs/ @IsakNaslundBH @pawelbaran @adecler @michaelhoehn
+# *.yml @IsakNaslundBH @pawelbaran @adecler @michaelhoehn
