@@ -324,13 +324,25 @@ jobs:
           $failedReviewers = @()
           
           foreach ($reviewer in $reviewers) {
+            Write-Host "Attempting to add reviewer: $reviewer"
             try {
-              gh pr edit $prUrl --add-reviewer $reviewer
-              $successfulReviewers += $reviewer
-              Write-Host "✓ Successfully added reviewer: $reviewer"
+              $output = gh pr edit $prUrl --add-reviewer $reviewer 2>&1 | Out-String
+              Write-Host "Command output: $output"
+              
+              # Verify the reviewer was actually added by checking the PR
+              $prDetails = gh pr view $prUrl --json reviewRequests | ConvertFrom-Json
+              $currentReviewers = $prDetails.reviewRequests | ForEach-Object { $_.login }
+              
+              if ($currentReviewers -contains $reviewer) {
+                $successfulReviewers += $reviewer
+                Write-Host "✓ Successfully added reviewer: $reviewer"
+              } else {
+                $failedReviewers += $reviewer
+                Write-Host "⚠️ Failed to add reviewer: $reviewer (not found in PR reviewers list)"
+              }
             } catch {
               $failedReviewers += $reviewer
-              Write-Host "⚠️ Failed to add reviewer: $reviewer"
+              Write-Host "⚠️ Failed to add reviewer: $reviewer (exception: $($_.Exception.Message))"
             }
           }
           
