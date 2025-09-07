@@ -33,6 +33,7 @@ The following properties are defined on the class
 | Instance | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | If true, the Revit parameter represented by this object is an instance parameter, otherwise it is a type parameter. | - |
 | Categories | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0)&gt; | Categories, to which the Revit parameter represented by this object is bound. On Push, it will get bound to all categories if this value is null. | - |
 | Shared | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | If true, the Revit parameter represented by this object is a shared parameter, otherwise it is a project parameter. | - |
+| Guid | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Unique identifier of the Revit parameter for a shared parameter. Only relevant on pull, can't be set on Push. | - |
 
 
 ### Inherited properties

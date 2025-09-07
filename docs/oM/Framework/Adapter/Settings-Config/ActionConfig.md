@@ -32,6 +32,7 @@ Consider that your tookit might have a more specific implementation available. T
     - BH.oM.Environment.IES.[PullConfigIES](/api/oM/Adapter/Environment/PullConfigIES)
     - BH.oM.Environment.IES.[PushConfigIES](/api/oM/Adapter/Environment/PushConfigIES)
     - BH.oM.LadybugTools.[LadybugConfig](/api/oM/Adapter/LadybugTools/Config/LadybugConfig)
+    - BH.oM.Adapters.Revit.[RevitExecutionConfig](/api/oM/Adapter/Adapters/Revit/Config/RevitExecutionConfig)
     - BH.oM.Adapters.Revit.[RevitPullConfig](/api/oM/Adapter/Adapters/Revit/Config/RevitPullConfig)
     - BH.oM.Adapters.Revit.[RevitPushConfig](/api/oM/Adapter/Adapters/Revit/Config/RevitPushConfig)
     - BH.oM.Adapters.Revit.[RevitRemoveConfig](/api/oM/Adapter/Adapters/Revit/Config/RevitRemoveConfig)
