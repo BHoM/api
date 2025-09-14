@@ -30,6 +30,7 @@ The following properties are defined on the class
 |------------------|------------------|------------------|------------------|
 | VehicleEmissions | [VehicleEmissions](/api/oM/Analytical/LifeCycleAssessment/MaterialFragments/Transport/VehicleEmissions) | Emissions for the vechicle for the particular part of the journey. | - |
 | DistanceTraveled | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Total distance transported with the particular vehicle. | [Length](/api/oM/Dimensional/Quantities/Attributes/Length) [m] |
+| Factor | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Factor applied to the resulting emission for this single mode transport. Resulting value will be multiplied by this factor. Mainly used for creating end of life routes where parts of the material will be going to different facilities. | - |
 
 
 ### Inherited properties
