@@ -38,7 +38,7 @@ The following properties are defined as extension methods in one of the BHoM_Eng
 
 | Name             | Type             | Description      | Quantity         | Engine           |
 |------------------|------------------|------------------|------------------|------------------|
-| Bounds | [BoundingBox](/api/oM/Dimensional/Geometry/Misc/BoundingBox) | Computes and returns the BoundingBox of the RenderGeometry as the bounding box of the its Geometry. | - | Graphics_Engine |
+| Bounds | [BoundingBox](/api/oM/Dimensional/Geometry/Misc/BoundingBox) | Computes and returns the BoundingBox of the RenderGeometry as the bounding box of its Geometry. | - | Graphics_Engine |
 | IBounds | [BoundingBox](/api/oM/Dimensional/Geometry/Misc/BoundingBox) | Computes and returns the BoundingBox of the IRender. | - | Graphics_Engine |
 
 

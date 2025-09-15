@@ -20,6 +20,7 @@ Base interface for evaluation configs controling how metrics should be evaluated
 
 ???+ bhom "The following classes are implementing this interface:"
 
+    - BH.oM.LifeCycleAssessment.Configs.[GlobalEmissionFactors](/api/oM/Analytical/LifeCycleAssessment/Configs/GlobalEmissionFactors)
     - BH.oM.LifeCycleAssessment.Configs.[IStructEEvaluationConfig](/api/oM/Analytical/LifeCycleAssessment/Configs/IStructEEvaluationConfig)
 
 

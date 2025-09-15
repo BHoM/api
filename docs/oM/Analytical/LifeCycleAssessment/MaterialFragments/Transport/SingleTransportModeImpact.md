@@ -30,6 +30,7 @@ The following properties are defined on the class
 |------------------|------------------|------------------|------------------|
 | VehicleEmissions | [VehicleEmissions](/api/oM/Analytical/LifeCycleAssessment/MaterialFragments/Transport/VehicleEmissions) | Emissions for the vechicle for the particular part of the journey. | - |
 | DistanceTraveled | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Total distance transported with the particular vehicle. | [Length](/api/oM/Dimensional/Quantities/Attributes/Length) [m] |
+| Factor | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | Factor applied to the resulting emission for this single mode transport. Resulting value will be multiplied by this factor. Mainly used for creating end of life routes where parts of the material will be going to different facilities. | - |
 
 
 ### Inherited properties
@@ -62,3 +63,16 @@ The C# class definition is available on github:
 - [SingleTransportModeImpact.cs](https://github.com/BHoM/BHoM/blob/develop/LifeCycleAssessment_oM/MaterialFragments\Transport\SingleTransportModeImpact.cs)
 
 All history and changes of the class can be found by inspection the history.
+### JSON Schema implementation
+
+The object is defined as a JSON schema. You can validate a JSON instance against this schema by reference. To do this, use the schema reference below in a validator like [this one](https://www.jsonschemavalidator.net/).
+
+``` json title="JSON Schema"
+{
+ "$ref" : "https://raw.githubusercontent.com/BHoM/BHoM_JSONSchema/develop/LifeCycleAssessment_oM/MaterialFragments/Transport/SingleTransportModeImpact.json"
+}
+```
+
+The JSON Schema is available on github here:
+
+- [SingleTransportModeImpact.json](https://github.com/BHoM/BHoM_JSONSchema/blob/develop/LifeCycleAssessment_oM/MaterialFragments/Transport/SingleTransportModeImpact.json)
