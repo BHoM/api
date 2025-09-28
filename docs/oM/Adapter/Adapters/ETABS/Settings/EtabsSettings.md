@@ -27,6 +27,7 @@ The following properties are defined on the class
 |------------------|------------------|------------------|------------------|
 | ReplaceLoads | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | Sets whether the loads being pushed should overwrite existing loads on the same object within the same loadcase | - |
 | DatabaseSettings | [DatabaseSettings](/api/oM/Adapter/Adapters/ETABS/Settings/DataBaseSettings) |  | - |
+| EtabsVersion | [EtabsVersion](/api/oM/Adapter/Adapters/ETABS/Enums/EtabsVersion) | Sets the version of ETABS to launch when running the adapter. | - |
 
 
 ## Code and Schema
