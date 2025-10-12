@@ -729,6 +729,7 @@ title: IObject
     - BH.oM.Adapters.GSA.Fragments.[PanelBoundaryNodeFragment](/api/oM/Adapter/Adapters/GSA/Fragments/PanelBoundaryNodeFragment)
     - BH.oM.Adapters.GSA.FormFindingProperties.[SoapStress1D](/api/oM/Adapter/Adapters/GSA/FormFindingProperties/SoapStress1D)
     - BH.oM.Adapters.GSA.FormFindingProperties.[SoapStress2D](/api/oM/Adapter/Adapters/GSA/FormFindingProperties/SoapStress2D)
+    - BH.oM.Adapters.GSA.Elements.[Joint](/api/oM/Adapter/Adapters/GSA/Elements/Joint)
     - BH.oM.Adapters.GSA.Elements.[RigidConstraint](/api/oM/Adapter/Adapters/GSA/Elements/RigidConstraint)
     - BH.oM.Adapters.GSA.Elements.[Spacer](/api/oM/Adapter/Adapters/GSA/Elements/Spacer)
     - BH.oM.Adapters.GSA.Analysis.[AnalysisStage](/api/oM/Adapter/Adapters/GSA/Analysis/AnalysisStage)
