@@ -29,14 +29,14 @@ The following properties are defined on the class
 | Name             | Type             | Description      | Quantity         |
 |------------------|------------------|------------------|------------------|
 | PersistentId | [object](https://learn.microsoft.com/en-us/dotnet/api/System.Object?view=netstandard-2.0) | The PersistentId property stores the UniqueId of the Revit element correspondent to the BHoM object that owns this fragment. The PersistentId can be used for Diffing purposes. | - |
-| ElementId | [int](https://learn.microsoft.com/en-us/dotnet/api/System.Int32?view=netstandard-2.0) | ElementId of the Revit element correspondent to the BHoM object that carries this fragment. | - |
+| ElementId | [long](https://learn.microsoft.com/en-us/dotnet/api/System.Int64?view=netstandard-2.0) | ElementId of the Revit element correspondent to the BHoM object that carries this fragment. | - |
 | CategoryName | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Category of the Revit element correspondent to the BHoM object that carries this fragment. | - |
 | FamilyName | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Family of the Revit element correspondent to the BHoM object that carries this fragment. | - |
 | FamilyTypeName | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Family type of the Revit element correspondent to the BHoM object that carries this fragment. | - |
-| FamilyTypeId | [int](https://learn.microsoft.com/en-us/dotnet/api/System.Int32?view=netstandard-2.0) | ElementId of family type of the Revit element correspondent to the BHoM object that carries this fragment. | - |
+| FamilyTypeId | [long](https://learn.microsoft.com/en-us/dotnet/api/System.Int64?view=netstandard-2.0) | ElementId of family type of the Revit element correspondent to the BHoM object that carries this fragment. | - |
 | Workset | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Name of the parent workset of the Revit element correspondent to the BHoM object that carries this fragment. Empty if the Revit model is not shared. | - |
-| OwnerViewId | [int](https://learn.microsoft.com/en-us/dotnet/api/System.Int32?view=netstandard-2.0) | ElementId of view that owns the Revit element correspondent to the BHoM object that carries this fragment. -1 if the Revit element is not view-dependent. | - |
-| ParentElementId | [int](https://learn.microsoft.com/en-us/dotnet/api/System.Int32?view=netstandard-2.0) | ElementId of the parent element of the Revit element correspondent to the BHoM object that carries this fragment. -1 if the Revit element is not a nested element. | - |
+| OwnerViewId | [long](https://learn.microsoft.com/en-us/dotnet/api/System.Int64?view=netstandard-2.0) | ElementId of view that owns the Revit element correspondent to the BHoM object that carries this fragment. -1 if the Revit element is not view-dependent. | - |
+| ParentElementId | [long](https://learn.microsoft.com/en-us/dotnet/api/System.Int64?view=netstandard-2.0) | ElementId of the parent element of the Revit element correspondent to the BHoM object that carries this fragment. -1 if the Revit element is not a nested element. | - |
 | LinkDocument | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Name of the link document containing the Revit element correspondent to the BHoM object that carries this fragment. Empty if the Revit element is not a link element. | - |
 
 

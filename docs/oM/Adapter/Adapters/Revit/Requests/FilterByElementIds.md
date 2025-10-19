@@ -26,7 +26,7 @@ The following properties are defined on the class
 
 | Name             | Type             | Description      | Quantity         |
 |------------------|------------------|------------------|------------------|
-| ElementIds | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[int](https://learn.microsoft.com/en-us/dotnet/api/System.Int32?view=netstandard-2.0)&gt; | List of integers representing Revit ElementIds to be used to filter the elements. | - |
+| ElementIds | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[long](https://learn.microsoft.com/en-us/dotnet/api/System.Int64?view=netstandard-2.0)&gt; | List of integers representing Revit ElementIds to be used to filter the elements. | - |
 
 
 ### Derived properties
