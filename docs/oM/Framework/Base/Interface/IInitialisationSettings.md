@@ -26,7 +26,8 @@ The following properties are defined on the interface
 
 | Name             | Type             | Description      | Quantity         |
 |------------------|------------------|------------------|------------------|
-| InitialisationMethod | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | - | - |
+| InitialisationMethod | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Method used to intialise the toolkit. It has to be written has follows: '&lt;Full namespace&gt;.&lt;Declaring type&gt;.&lt;Method name&gt;' | - |
+| InitialisationAssembly | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Name of the method containing teh initialisation assembly. Only provide the name of the assembly itself, no file path or extension. | - |
 
 
 ## Code and Schema
