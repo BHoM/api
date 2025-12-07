@@ -28,6 +28,7 @@ The following properties are defined on the class
 |------------------|------------------|------------------|------------------|
 | JsonFile | [FileSettings](/api/oM/Framework/Adapter/FileSettings) | File settings for the json file to pull/push to. | - |
 | CacheFileMaximumAge | [int](https://learn.microsoft.com/en-us/dotnet/api/System.Int32?view=netstandard-2.0) | The amount of time (in days) any files that have been created by the adapter for caching purposes should exist before being removed/recreated. <br> Files are only deleted/updated . <br> Set to 0 to force a recompute of a simulation that has a stored cache. | - |
+| SkipEPWCheck | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | Skips EPW file checks to allow epw files that are not on a drive accessible to the adapter. In general this should be set to false. | - |
 
 
 ### Inherited properties

@@ -130,6 +130,8 @@ Describes objects that can exist independently or can be attached to other BHoM 
     - BH.oM.Adapters.RFEM6.IntermediateDatastructure.Geometry.[RFEMLine](/api/oM/Adapter/Adapters/RFEM6/IntermediateDatastructure/Geometry/RFEMLine)
     - BH.oM.Adapters.RFEM6.IntermediateDatastructure.Geometry.[RFEMOpening](/api/oM/Adapter/Adapters/RFEM6/IntermediateDatastructure/Geometry/RFEMOpening)
     - BH.oM.Adapters.RFEM6.BHoMDataStructure.SupportDatastrures.[RFEM6GeometricalLineLoadTypes](/api/oM/Adapter/Adapters/RFEM6/BHoMDataStructure/SupportDatastrures/RFEM6GeometricalLineLoadTypes)
+    - BH.oM.Adapters.Robot.[ContourLoadPanelNumbers](/api/oM/Adapter/Adapters/Robot/Fragments/ContourLoadPanelNumbers)
+    - BH.oM.Adapters.Robot.[LoadCombinationType](/api/oM/Adapter/Adapters/Robot/Fragments/LoadCombinationType)
     - BH.oM.Adapters.Robot.[LoadCaseLabel](/api/oM/Adapter/Adapters/Robot/Fragments/LoadCaseLabel)
     - BH.oM.Adapters.Robot.[PanelFiniteElementIds](/api/oM/Adapter/Adapters/Robot/Fragments/PanelFiniteElementIds)
     - BH.oM.Adapters.Robot.[RobotId](/api/oM/Adapter/Adapters/Robot/Fragments/RobotId)
