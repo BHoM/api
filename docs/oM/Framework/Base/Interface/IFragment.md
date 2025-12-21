@@ -69,6 +69,7 @@ Describes objects that can exist independently or can be attached to other BHoM 
     - BH.oM.Adapters.ETABS.Elements.[Pier](/api/oM/Adapter/Adapters/ETABS/Elements/Pier)
     - BH.oM.Adapters.ETABS.Elements.[Spandrel](/api/oM/Adapter/Adapters/ETABS/Elements/Spandrel)
     - BH.oM.Adapters.ETABS.Elements.[InsertionPoint](/api/oM/Adapter/Adapters/ETABS/Fragments/InsertionPoint)
+    - BH.oM.Adapters.ETABS.Fragments.[Tower](/api/oM/Adapter/Adapters/ETABS/Fragments/Tower)
     - BH.oM.Adapters.ETABS.Fragments.[ShellTypeFragment](/api/oM/Adapter/Adapters/ETABS/Fragments/ShellTypeFragment)
     - BH.oM.Facade.Fragments.[ConstructionOffset](/api/oM/Analytical/Facade/Fragments/ConstructionOffset)
     - BH.oM.Facade.Fragments.[FrameExtensionBox](/api/oM/Analytical/Facade/Fragments/FrameExtensionBox)
