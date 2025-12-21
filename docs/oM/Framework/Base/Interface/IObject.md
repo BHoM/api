@@ -583,6 +583,7 @@ title: IObject
     - BH.oM.Adapters.ETABS.Results.[SpandrelForce](/api/oM/Adapter/Adapters/ETABS/Results/SpandrelForce)
     - BH.oM.Adapters.ETABS.Results.[PierForce](/api/oM/Adapter/Adapters/ETABS/Results/PierForce)
     - BH.oM.Adapters.ETABS.Requests.[PierAndSpandrelForceRequest](/api/oM/Adapter/Adapters/ETABS/Requests/PierAndSpandrelForceRequest)
+    - BH.oM.Adapters.ETABS.Fragments.[Tower](/api/oM/Adapter/Adapters/ETABS/Fragments/Tower)
     - BH.oM.Adapters.ETABS.Fragments.[ShellTypeFragment](/api/oM/Adapter/Adapters/ETABS/Fragments/ShellTypeFragment)
     - BH.oM.Adapters.Excel.[CellAddress](/api/oM/Adapter/Adapters/Excel/Address/CellAddress)
     - BH.oM.Adapters.Excel.[CellRange](/api/oM/Adapter/Adapters/Excel/Address/CellRange)
