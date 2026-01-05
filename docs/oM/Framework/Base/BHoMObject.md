@@ -153,6 +153,7 @@ title: BHoMObject
     - BH.oM.Adapters.ETABS.Elements.[Diaphragm](/api/oM/Adapter/Adapters/ETABS/Elements/Diaphragm)
     - BH.oM.Adapters.ETABS.Elements.[Pier](/api/oM/Adapter/Adapters/ETABS/Elements/Pier)
     - BH.oM.Adapters.ETABS.Elements.[Spandrel](/api/oM/Adapter/Adapters/ETABS/Elements/Spandrel)
+    - BH.oM.Adapters.ETABS.Fragments.[Tower](/api/oM/Adapter/Adapters/ETABS/Fragments/Tower)
     - BH.oM.Adapters.Excel.[CellContents](/api/oM/Adapter/Adapters/Excel/ClosedXML/CellContents)
     - BH.oM.Adapters.Excel.[WorkbookProperties](/api/oM/Adapter/Adapters/Excel/ClosedXML/WorkbookProperties)
     - BH.oM.Adapters.Excel.[PushItem](/api/oM/Adapter/Adapters/Excel/PushItem)
