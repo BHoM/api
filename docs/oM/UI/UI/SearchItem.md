@@ -32,6 +32,7 @@ The following properties are defined on the class
 | Icon | [Bitmap](https://learn.microsoft.com/en-us/dotnet/api/System.Drawing.Bitmap?view=netstandard-2.0) | - | - |
 | Text | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | - | - |
 | Weight | [double](https://learn.microsoft.com/en-us/dotnet/api/System.Double?view=netstandard-2.0) | - | - |
+| Json | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | - | - |
 
 
 ### Inherited properties
