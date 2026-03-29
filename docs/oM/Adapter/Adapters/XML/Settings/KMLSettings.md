@@ -28,7 +28,7 @@ The following properties are defined on the class
 
 | Name             | Type             | Description      | Quantity         |
 |------------------|------------------|------------------|------------------|
-| NewFile | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | Set to false if you want to append to a file when pushing XML. If set to true then a file will be created. If a file exists, it will be overwritten. Default true | - |
+| NewFile | [bool](https://learn.microsoft.com/en-us/dotnet/api/System.Boolean?view=netstandard-2.0) | Set to false if you want to append to a file when pushing XML. If set to true then a file will be created. If a file exists, it will be overwritten. Default true. | - |
 
 
 ### Inherited properties
