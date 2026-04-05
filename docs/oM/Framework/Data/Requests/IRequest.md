@@ -49,7 +49,7 @@ title: IRequest
     - BH.oM.Adapters.File.[FileContentRequest](/api/oM/Adapter/Adapters/File/Requests/FileContentRequest)
     - BH.oM.Adapters.File.[FileDirRequest](/api/oM/Adapter/Adapters/File/Requests/FileDirRequest)
     - BH.oM.Adapters.File.[FileRequest](/api/oM/Adapter/Adapters/File/Requests/FileRequest)
-    - BH.oM.Adapters.File.[RemoveRequest](/api/oM/Adapter/Adapters/File/Requests/IRemoveRequest)
+    - BH.oM.Adapters.File.[RemoveRequest](/api/oM/Adapter/Adapters/File/Requests/RemoveRequest)
     - BH.oM.Adapters.HTTP.[GetRequest](/api/oM/Adapter/Adapters/HTTP/GetRequest)
     - BH.oM.Adapters.Mongo.Requests.[CollectionNames](/api/oM/Adapter/Adapters/Mongo/Requests/CollectionNames)
     - BH.oM.Adapters.Revit.Requests.[ConditionRequest](/api/oM/Adapter/Adapters/Revit/Requests/ConditionRequest)

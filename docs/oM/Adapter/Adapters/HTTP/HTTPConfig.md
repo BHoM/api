@@ -52,7 +52,7 @@ Assembly: HTTP_oM.dll
 
 The C# class definition is available on github:
 
-- [HTTPConfig.cs](https://github.com/BHoM/HTTP_Toolkit/blob/develop/HTTP_oM/HTTPAdapterConfig.cs)
+- [HTTPConfig.cs](https://github.com/BHoM/HTTP_Toolkit/blob/develop/HTTP_oM/HTTPConfig.cs)
 
 All history and changes of the class can be found by inspection the history.
 ### JSON Schema implementation

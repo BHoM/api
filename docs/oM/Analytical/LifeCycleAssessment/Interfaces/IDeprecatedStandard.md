@@ -44,7 +44,7 @@ The following properties are defined as extension methods in one of the BHoM_Eng
 
 | Name             | Type             | Description      | Quantity         | Engine           |
 |------------------|------------------|------------------|------------------|------------------|
-| IMetricType | [MetricType](/api/oM/Analytical/LifeCycleAssessment/Enums/MetricType) | - | - | LifeCycleAssessment_Engine |
+| IMetricType | [MetricType](/api/oM/Analytical/LifeCycleAssessment/Enums/MetricType) | Gets the MetricType enum value corresponding to the provided ILifeCycleAssessmentIndicator by matching the indicator's type name. | - | LifeCycleAssessment_Engine |
 
 
 ## Code and Schema
