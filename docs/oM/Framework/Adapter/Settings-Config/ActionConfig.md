@@ -27,7 +27,7 @@ Consider that your tookit might have a more specific implementation available. T
     - BH.oM.Adapters.File.[PushConfig](/api/oM/Adapter/Adapters/File/Config/PushConfig)
     - BH.oM.Adapters.File.[RemoveConfig](/api/oM/Adapter/Adapters/File/Config/RemoveConfig)
     - BH.oM.Adapters.GSA.[GSAConfig](/api/oM/Adapter/Adapters/GSA/Settings/GSAConfig)
-    - BH.oM.Adapters.HTTP.[HTTPConfig](/api/oM/Adapter/Adapters/HTTP/HTTPAdapterConfig)
+    - BH.oM.Adapters.HTTP.[HTTPConfig](/api/oM/Adapter/Adapters/HTTP/HTTPConfig)
     - BH.oM.Adapters.iAuditor.[iAuditorConfig](/api/oM/Adapter/Adapters/iAuditor/Adapter/iAuditorConfig)
     - BH.oM.Environment.IES.[PullConfigIES](/api/oM/Adapter/Environment/PullConfigIES)
     - BH.oM.Environment.IES.[PushConfigIES](/api/oM/Adapter/Environment/PushConfigIES)

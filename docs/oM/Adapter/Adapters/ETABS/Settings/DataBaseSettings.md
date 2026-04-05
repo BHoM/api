@@ -40,7 +40,7 @@ Assembly: ETABS_oM.dll
 
 The C# class definition is available on github:
 
-- [DatabaseSettings.cs](https://github.com/BHoM/ETABS_Toolkit/blob/develop/ETABS_oM/Settings\DataBaseSettings.cs)
+- [DatabaseSettings.cs](https://github.com/BHoM/ETABS_Toolkit/blob/develop/ETABS_oM/Settings\DatabaseSettings.cs)
 
 All history and changes of the class can be found by inspection the history.
 ### JSON Schema implementation

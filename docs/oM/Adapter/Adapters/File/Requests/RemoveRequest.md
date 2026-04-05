@@ -51,7 +51,7 @@ Assembly: File_oM.dll
 
 The C# class definition is available on github:
 
-- [RemoveRequest.cs](https://github.com/BHoM/File_Toolkit/blob/develop/File_oM/Requests\IRemoveRequest.cs)
+- [RemoveRequest.cs](https://github.com/BHoM/File_Toolkit/blob/develop/File_oM/Requests\RemoveRequest.cs)
 
 All history and changes of the class can be found by inspection the history.
 ### JSON Schema implementation
