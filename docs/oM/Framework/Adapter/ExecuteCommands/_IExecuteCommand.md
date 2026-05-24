@@ -41,6 +41,7 @@ Classes implementing IExecuteCommand are commands compatible with the `Execute` 
     - BH.oM.Adapters.File.[CopyCommand](/api/oM/Adapter/Adapters/File/Commands/CopyCommand)
     - BH.oM.Adapters.File.[MoveCommand](/api/oM/Adapter/Adapters/File/Commands/MoveCommand)
     - BH.oM.Adapters.File.[RenameCommand](/api/oM/Adapter/Adapters/File/Commands/RenameCommand)
+    - BH.oM.LadybugTools.[CompareEPWKeyPlotCommand](/api/oM/Adapter/LadybugTools/ExecuteCommands/CompareEPWKeyPlotCommand)
     - BH.oM.LadybugTools.[DiurnalPlotCommand](/api/oM/Adapter/LadybugTools/ExecuteCommands/DiurnalPlotCommand)
     - BH.oM.LadybugTools.[EPWToCSVCommand](/api/oM/Adapter/LadybugTools/ExecuteCommands/EPWToCSVCommand)
     - BH.oM.LadybugTools.[FacadeCondensationRiskCommand](/api/oM/Adapter/LadybugTools/ExecuteCommands/FacadeCondensationRiskCommand)
