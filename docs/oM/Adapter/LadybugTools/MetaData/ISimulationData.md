@@ -20,6 +20,7 @@ title: ISimulationData
 ???+ bhom "The following classes are implementing this interface:"
 
     - BH.oM.LadybugTools.[CollectionData](/api/oM/Adapter/LadybugTools/MetaData/CollectionData)
+    - BH.oM.LadybugTools.[NoData](/api/oM/Adapter/LadybugTools/MetaData/NoData)
     - BH.oM.LadybugTools.[SolarRadiationData](/api/oM/Adapter/LadybugTools/MetaData/SolarRadiationData)
     - BH.oM.LadybugTools.[SunPathData](/api/oM/Adapter/LadybugTools/MetaData/SunPathData)
     - BH.oM.LadybugTools.[UTCIData](/api/oM/Adapter/LadybugTools/MetaData/UTCIData)

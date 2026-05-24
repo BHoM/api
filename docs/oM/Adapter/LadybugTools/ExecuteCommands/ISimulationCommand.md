@@ -20,6 +20,7 @@ title: ISimulationCommand
 
 ???+ bhom "The following classes are implementing this interface:"
 
+    - BH.oM.LadybugTools.[CompareEPWKeyPlotCommand](/api/oM/Adapter/LadybugTools/ExecuteCommands/CompareEPWKeyPlotCommand)
     - BH.oM.LadybugTools.[DiurnalPlotCommand](/api/oM/Adapter/LadybugTools/ExecuteCommands/DiurnalPlotCommand)
     - BH.oM.LadybugTools.[FacadeCondensationRiskCommand](/api/oM/Adapter/LadybugTools/ExecuteCommands/FacadeCondensationRiskCommand)
     - BH.oM.LadybugTools.[HeatPlotCommand](/api/oM/Adapter/LadybugTools/ExecuteCommands/HeatPlotCommand)
