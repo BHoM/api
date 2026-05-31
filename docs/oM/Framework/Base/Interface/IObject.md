@@ -1430,6 +1430,7 @@ title: IObject
     - BH.oM.Adapters.SQL.[PushConfig](/api/oM/Adapter/Adapters/SQL/Configs/PushConfig)
     - BH.oM.Adapters.SQL.[CustomRequest](/api/oM/Adapter/Adapters/SQL/Requests/CustomRequest)
     - BH.oM.Adapters.SQL.[TableRequest](/api/oM/Adapter/Adapters/SQL/Requests/TableRequest)
+    - BH.oM.Adapters.SQL.[SqlClientAssemblyFixSettings](/api/oM/Adapter/Adapters/SQL/ToolkitSettings/SqlClientAssemblyFixSettings)
     - BH.oM.Adapters.STL.[GeometryGroup](/api/oM/Adapter/Adapters/STL/GeometryGroup)
     - BH.oM.Adapters.STL.Settings.[STLSettings](/api/oM/Adapter/Adapters/STL/STLSettings)
     - BH.oM.Structure.SurfaceProperties.[BiDirectionalVoided](/api/oM/Analytical/Structure/SurfaceProperties/BiDirectionalVoided)

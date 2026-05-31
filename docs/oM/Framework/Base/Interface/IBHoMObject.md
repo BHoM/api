@@ -718,6 +718,7 @@ title: IBHoMObject
     - BH.oM.Spatial.Layouts.[MultiLinearLayout](/api/oM/Dimensional/Spatial/Layouts/MultiLinearLayout)
     - BH.oM.Spatial.Layouts.[OffsetCurveLayout](/api/oM/Dimensional/Spatial/Layouts/OffsetCurveLayout)
     - BH.oM.Spatial.Layouts.[PerimeterLayout](/api/oM/Dimensional/Spatial/Layouts/PerimeterLayout)
+    - BH.oM.Adapters.SQL.[SqlClientAssemblyFixSettings](/api/oM/Adapter/Adapters/SQL/ToolkitSettings/SqlClientAssemblyFixSettings)
     - BH.oM.Adapters.STL.[GeometryGroup](/api/oM/Adapter/Adapters/STL/GeometryGroup)
     - BH.oM.Adapters.STL.Settings.[STLSettings](/api/oM/Adapter/Adapters/STL/STLSettings)
     - BH.oM.Structure.SurfaceProperties.[BiDirectionalVoided](/api/oM/Analytical/Structure/SurfaceProperties/BiDirectionalVoided)

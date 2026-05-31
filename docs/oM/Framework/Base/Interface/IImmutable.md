@@ -304,6 +304,7 @@ title: IImmutable
     - BH.oM.Spatial.Layouts.[LinearLayout](/api/oM/Dimensional/Spatial/Layouts/LinearLayout)
     - BH.oM.Spatial.Layouts.[MultiLinearLayout](/api/oM/Dimensional/Spatial/Layouts/MultiLinearLayout)
     - BH.oM.Spatial.Layouts.[OffsetCurveLayout](/api/oM/Dimensional/Spatial/Layouts/OffsetCurveLayout)
+    - BH.oM.Adapters.SQL.[SqlClientAssemblyFixSettings](/api/oM/Adapter/Adapters/SQL/ToolkitSettings/SqlClientAssemblyFixSettings)
     - BH.oM.Structure.SectionProperties.[AluminiumSection](/api/oM/Analytical/Structure/SectionProperties/AluminiumSection)
     - BH.oM.Structure.SectionProperties.[CableSection](/api/oM/Analytical/Structure/SectionProperties/CableSection)
     - BH.oM.Structure.SectionProperties.[CellularSection](/api/oM/Analytical/Structure/SectionProperties/CellularSection)
