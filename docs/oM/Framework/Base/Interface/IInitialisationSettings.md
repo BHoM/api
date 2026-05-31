@@ -16,6 +16,13 @@ Toolkit Settings that contain an initialisation method to be ran when the UI sta
     -  BH.oM.Base.[IObject](/api/oM/Framework/Base/Interface/IObject)
 
 
+### Classes implementing this interface
+
+???+ bhom "The following classes are implementing this interface:"
+
+    - BH.oM.Adapters.SQL.[SqlClientAssemblyFixSettings](/api/oM/Adapter/Adapters/SQL/ToolkitSettings/SqlClientAssemblyFixSettings)
+
+
 ## Properties
 
 

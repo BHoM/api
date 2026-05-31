@@ -21,6 +21,7 @@ Toolkit Settings that need to be saved permanently.
 
     - BH.oM.Data.Library.[LibrarySettings](/api/oM/Framework/Data/Library/LibrarySettings)
     - BH.oM.Grasshopper.[UISettings](/api/oM/UI/Grasshopper/UISettings)
+    - BH.oM.Adapters.SQL.[SqlClientAssemblyFixSettings](/api/oM/Adapter/Adapters/SQL/ToolkitSettings/SqlClientAssemblyFixSettings)
     - BH.oM.UI.[SearchSettings](/api/oM/UI/UI/Settings/SearchSettings)
 
 
