@@ -1570,6 +1570,8 @@ title: IObject
     - BH.oM.UI.[CodeElementRecord](/api/oM/UI/UI/CodeElementRecord)
     - BH.oM.UI.[ComponentRequest](/api/oM/UI/UI/ComponentRequest)
     - BH.oM.UI.[CustomItem](/api/oM/UI/UI/CustomItem)
+    - BH.oM.UI.[CustomRibbonEntry](/api/oM/UI/UI/CustomRibbonEntry)
+    - BH.oM.UI.[CustomRibbonSettings](/api/oM/UI/UI/CustomRibbonSettings)
     - BH.oM.UI.[ParamInfo](/api/oM/UI/UI/ParamInfo)
     - BH.oM.UI.[ParamOldIndexFragment](/api/oM/UI/UI/ParamOldIndexFragment)
     - BH.oM.UI.[PreviousNamesFragment](/api/oM/UI/UI/PreviousNamesFragment)
