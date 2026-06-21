@@ -26,7 +26,7 @@ The following properties are defined on the class
 
 | Name             | Type             | Description      | Quantity         |
 |------------------|------------------|------------------|------------------|
-| Toolkits | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[ToolkitSelectItem](/api/oM/UI/UI/Settings/ToolkitSelectItem)&gt; | - | - |
+| ExcludedToolkits | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0)&gt; | - | - |
 
 
 ## Code and Schema
