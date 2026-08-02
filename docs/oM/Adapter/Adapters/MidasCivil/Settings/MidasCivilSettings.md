@@ -28,6 +28,7 @@ The following properties are defined on the class
 |------------------|------------------|------------------|------------------|
 | Version | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | The version of MidasCivil to be used by the adapter. | - |
 | mApiKey | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | The active mApi-key when using a version of Midas Civil with API connection available. Found under Apps - API Settings. Make sure Midas is connected to the API before running the adapter. | - |
+| OutputFolder | [string](https://learn.microsoft.com/en-us/dotnet/api/System.String?view=netstandard-2.0) | Output folder when pulling text results, e.g time history results. | - |
 
 
 ### Inherited properties

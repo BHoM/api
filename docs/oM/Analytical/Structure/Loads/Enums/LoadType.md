@@ -24,6 +24,7 @@ title: LoadType
 | AreaTemperature |  -  |
 | Pressure |  -  |
 | Geometrical |  -  |
+| TransientTimeHistoryLoad |  -  |
 
 
 ## Code and Schema

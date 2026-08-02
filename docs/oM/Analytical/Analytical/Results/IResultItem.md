@@ -89,6 +89,8 @@ For instance, a class implementing this interface could be represented as a sing
     - BH.oM.Structure.Results.[ModalMassAndFrequency](/api/oM/Analytical/Structure/Results/Global Results/ModalMassAndFrequency)
     - BH.oM.Structure.Results.[StoreyDrift](/api/oM/Analytical/Structure/Results/Global Results/StoreyDrift)
     - BH.oM.Structure.Results.[StructuralGlobalResult](/api/oM/Analytical/Structure/Results/Global Results/StructuralGlobalResult)
+    - BH.oM.Structure.Results.[LinkDisplacement](/api/oM/Analytical/Structure/Results/Link Results/LinkDisplacement)
+    - BH.oM.Structure.Results.[LinkForce](/api/oM/Analytical/Structure/Results/Link Results/LinkForce)
     - BH.oM.Structure.Results.[MeshDisplacement](/api/oM/Analytical/Structure/Results/Mesh/MeshDisplacement)
     - BH.oM.Structure.Results.[MeshForce](/api/oM/Analytical/Structure/Results/Mesh/MeshForce)
     - BH.oM.Structure.Results.[MeshModeShape](/api/oM/Analytical/Structure/Results/Mesh/MeshModeShape)

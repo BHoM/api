@@ -32,7 +32,7 @@ Interface for results that correspond to a particular case.
 
 ### Classes implementing this interface
 
-???+ bhom "The following classes are implementing this interface:"
+??? bhom "The following classes are implementing this interface:"
 
     - BH.oM.Analytical.Elements.[ShortestPathResult](/api/oM/Analytical/Analytical/Results/ShortestPathResult)
     - BH.oM.Environment.Results.Mesh.[MeshElementResult](/api/oM/Analytical/Environment/Results/Mesh/MeshElementResult)
@@ -63,6 +63,9 @@ Interface for results that correspond to a particular case.
     - BH.oM.Structure.Results.[ModalMassAndFrequency](/api/oM/Analytical/Structure/Results/Global Results/ModalMassAndFrequency)
     - BH.oM.Structure.Results.[StoreyDrift](/api/oM/Analytical/Structure/Results/Global Results/StoreyDrift)
     - BH.oM.Structure.Results.[StructuralGlobalResult](/api/oM/Analytical/Structure/Results/Global Results/StructuralGlobalResult)
+    - BH.oM.Structure.Results.[LinkDisplacement](/api/oM/Analytical/Structure/Results/Link Results/LinkDisplacement)
+    - BH.oM.Structure.Results.[LinkForce](/api/oM/Analytical/Structure/Results/Link Results/LinkForce)
+    - BH.oM.Structure.Results.[LinkResult](/api/oM/Analytical/Structure/Results/Link Results/LinkResult)
     - BH.oM.Structure.Results.[MeshDisplacement](/api/oM/Analytical/Structure/Results/Mesh/MeshDisplacement)
     - BH.oM.Structure.Results.[MeshElementResult](/api/oM/Analytical/Structure/Results/Mesh/MeshElementResult)
     - BH.oM.Structure.Results.[MeshForce](/api/oM/Analytical/Structure/Results/Mesh/MeshForce)

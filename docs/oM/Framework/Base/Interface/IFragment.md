@@ -108,6 +108,7 @@ Describes objects that can exist independently or can be attached to other BHoM 
     - BH.oM.MEP.Fragments.[PlumbingFlowFragment](/api/oM/Analytical/MEP/Fragments/PlumbingFlowFragment)
     - BH.oM.MEP.Fragments.[PlumbingLoadingFixtureUnitFragment](/api/oM/Analytical/MEP/Fragments/PlumbingLoadingFixtureUnitFragment)
     - BH.oM.Adapters.MidasCivil.[MidasCivilId](/api/oM/Adapter/Adapters/MidasCivil/Fragments/MidasCivilId)
+    - BH.oM.Adapters.MidasCivil.[TimeHistorySettings](/api/oM/Adapter/Adapters/MidasCivil/Fragments/TimeHistorySettings)
     - BH.oM.Physical.Reinforcement.[ReinforcementFragment](/api/oM/Physical/Physical/Reinforcement/ReinforcementFragment)
     - BH.oM.Physical.Materials.[VolumetricMaterialTakeoff](/api/oM/Physical/Physical/Materials/VolumetricMaterialTakeoff)
     - BH.oM.Adapters.RAM.[RAMDeckData](/api/oM/Adapter/Adapters/RAM/Fragments/RAMDeckData)
