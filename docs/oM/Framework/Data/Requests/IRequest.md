@@ -87,6 +87,7 @@ title: IRequest
     - BH.oM.Adapters.SQL.[TableRequest](/api/oM/Adapter/Adapters/SQL/Requests/TableRequest)
     - BH.oM.Structure.Requests.[BarResultRequest](/api/oM/Analytical/Structure/Requests/BarResultRequest)
     - BH.oM.Structure.Requests.[GlobalResultRequest](/api/oM/Analytical/Structure/Requests/GlobalResultRequest)
+    - BH.oM.Structure.Requests.[LinkResultRequest](/api/oM/Analytical/Structure/Requests/LinkResultRequest)
     - BH.oM.Structure.Requests.[MeshResultRequest](/api/oM/Analytical/Structure/Requests/MeshResultRequest)
     - BH.oM.Structure.Requests.[NodeResultRequest](/api/oM/Analytical/Structure/Requests/NodeResultRequest)
 

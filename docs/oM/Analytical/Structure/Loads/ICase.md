@@ -23,6 +23,7 @@ Base interface for load cases and combinations.
     - BH.oM.Structure.Loads.[ModalCase](/api/oM/Adapter/Structure/Loads/ModalCase)
     - BH.oM.Structure.Loads.[Loadcase](/api/oM/Analytical/Structure/Loads/Loadcase)
     - BH.oM.Structure.Loads.[LoadCombination](/api/oM/Analytical/Structure/Loads/LoadCombination)
+    - BH.oM.Structure.Loads.[TimeHistoryLoadcase](/api/oM/Analytical/Structure/Loads/TimeHistoryLoadcase)
 
 
 ## Properties
