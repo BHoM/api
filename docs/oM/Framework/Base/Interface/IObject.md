@@ -719,6 +719,7 @@ title: IObject
     - BH.oM.Ground.[Stratum](/api/oM/Analytical/Ground/Stratum)
     - BH.oM.Ground.[StratumReference](/api/oM/Analytical/Ground/StratumProperties/StratumReference)
     - BH.oM.Ground.[Triaxial](/api/oM/Analytical/Ground/Triaxial)
+    - BH.oM.Ground.[WaterStrike](/api/oM/Analytical/Ground/WaterStrike)
     - BH.oM.Adapters.GSA.[AnalysisTaskFragment](/api/oM/Adapter/Adapters/GSA/Fragments/AnalysisTaskFragment)
     - BH.oM.Adapters.GSA.[DummyTag](/api/oM/Adapter/Adapters/GSA/Fragments/DummyTag)
     - BH.oM.Adapters.GSA.[GSAId](/api/oM/Adapter/Adapters/GSA/Fragments/GSAId)

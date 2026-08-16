@@ -210,6 +210,7 @@ title: BHoMObject
     - BH.oM.Ground.[Stratum](/api/oM/Analytical/Ground/Stratum)
     - BH.oM.Ground.[StratumReference](/api/oM/Analytical/Ground/StratumProperties/StratumReference)
     - BH.oM.Ground.[Triaxial](/api/oM/Analytical/Ground/Triaxial)
+    - BH.oM.Ground.[WaterStrike](/api/oM/Analytical/Ground/WaterStrike)
     - BH.oM.Adapters.GSA.SurfaceProperties.[FabricPanelProperty](/api/oM/Adapter/Adapters/GSA/SurfaceProperties/FabricPanelProperty)
     - BH.oM.Adapters.GSA.SpacerProperties.[SpacerProperty](/api/oM/Adapter/Adapters/GSA/SpacerProperties/SpacerProperty)
     - BH.oM.Adapters.GSA.MaterialFragments.[Fabric](/api/oM/Adapter/Adapters/GSA/MaterialFragments/Fabric)
