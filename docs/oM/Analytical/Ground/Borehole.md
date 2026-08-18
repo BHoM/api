@@ -34,6 +34,7 @@ The following properties are defined on the class
 | Strata | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[Stratum](/api/oM/Analytical/Ground/Stratum)&gt; | A list of objects containing the strata found within the borehole, based on the GEOL table. | - |
 | ContaminantSamples | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[ContaminantSample](/api/oM/Analytical/Ground/ContaminantSample)&gt; | A list of objects containing the contaminant samples found within the borehole, based on the ERES table. | - |
 | GeotechnicalTestResults | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[ITest](/api/oM/Analytical/Ground/ITest)&gt; | A list of objects containing the geotechnical results found within the borehole. | - |
+| WaterStrikeResults | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[WaterStrike](/api/oM/Analytical/Ground/WaterStrike)&gt; | A list of objects containing the water strike results found within the borehole. | - |
 | BoreholeProperties | [List](https://learn.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1?view=netstandard-2.0)&lt;[IBoreholeProperty](/api/oM/Analytical/Ground/BoreholeProperties/IBoreholeProperty)&gt; | A list of properties related to the borehole. | - |
 
 
