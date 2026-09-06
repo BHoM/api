@@ -43,6 +43,7 @@ title: IMaterialProperties
     - BH.oM.MEP.System.MaterialFragments.[LiningMaterial](/api/oM/Analytical/MEP/System/MaterialFragments/LiningMaterial)
     - BH.oM.MEP.System.MaterialFragments.[PipeMaterial](/api/oM/Analytical/MEP/System/MaterialFragments/PipeMaterial)
     - BH.oM.MEP.System.MaterialFragments.[WireMaterial](/api/oM/Analytical/MEP/System/MaterialFragments/WireMaterial)
+    - BH.oM.Physical.Materials.[MaterialClassification](/api/oM/Physical/Physical/Materials/MaterialClassification)
     - BH.oM.Structure.MaterialFragments.[Aluminium](/api/oM/Analytical/Structure/MaterialFragments/Aluminium)
     - BH.oM.Structure.MaterialFragments.[Concrete](/api/oM/Analytical/Structure/MaterialFragments/Concrete)
     - BH.oM.Structure.MaterialFragments.[GenericIsotropicMaterial](/api/oM/Analytical/Structure/MaterialFragments/GenericIsotropicMaterial)
@@ -56,6 +57,15 @@ title: IMaterialProperties
 
 
 ## Properties
+
+### Derived properties
+
+The following properties are defined as extension methods in one of the BHoM_Engines
+
+| Name             | Type             | Description      | Quantity         | Engine           |
+|------------------|------------------|------------------|------------------|------------------|
+| MaterialClassification | [MaterialClassification](/api/oM/Physical/Physical/Materials/MaterialClassification) | Evaluates the material classification of a material. | - | Matter_Engine |
+
 
 ## Code and Schema
 
