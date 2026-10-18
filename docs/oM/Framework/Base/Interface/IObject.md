@@ -209,6 +209,24 @@ title: IObject
     - BH.oM.Structure.Loads.[ICase](/api/oM/Analytical/Structure/Loads/ICase)
     - BH.oM.Structure.Loads.[IElementLoad](/api/oM/Analytical/Structure/Loads/IElementLoad)&lt;[T](/api/oM/Analytical/Structure/Loads/IElementLoad#t)&gt;
     - BH.oM.Structure.Loads.[ILoad](/api/oM/Analytical/Structure/Loads/ILoad)
+    - BH.oM.Structure.FloorSystem.[IBeamReinforcement](/api/oM/Analytical/Structure/FloorSystem/Detailing/IBeamReinforcement)
+    - BH.oM.Structure.FloorSystem.[ISlabReinforcement](/api/oM/Analytical/Structure/FloorSystem/Detailing/ISlabReinforcement)
+    - BH.oM.Structure.FloorSystem.[IConcreteDropheadSlabConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/IConcreteDropheadSlabConfiguration)&lt;[T](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/IConcreteDropheadSlabConfiguration#t)&gt;
+    - BH.oM.Structure.FloorSystem.[IConcreteFrameConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/IConcreteFrameConfiguration)
+    - BH.oM.Structure.FloorSystem.[IConcretePrimaryBeamConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/IConcretePrimaryBeamConfiguration)
+    - BH.oM.Structure.FloorSystem.[IConcreteSlabConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/IConcreteSlabConfiguration)&lt;[T](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/IConcreteSlabConfiguration#t)&gt;
+    - BH.oM.Structure.FloorSystem.[IPrimaryBeamConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/IPrimaryBeamConfiguration)&lt;[TPrimary](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/IPrimaryBeamConfiguration#tprimary)&gt;
+    - BH.oM.Structure.FloorSystem.[ISecondaryBeamConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ISecondaryBeamConfiguration)&lt;[TPrimary](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ISecondaryBeamConfiguration#tprimary), [TSecondary](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ISecondaryBeamConfiguration#tsecondary)&gt;
+    - BH.oM.Structure.FloorSystem.[ISlabConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ISlabConfiguration)&lt;[T](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ISlabConfiguration#t)&gt;
+    - BH.oM.Structure.FloorSystem.[ISteelFrameConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ISteelFrameConfiguration)
+    - BH.oM.Structure.FloorSystem.[ITertiaryBeamConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ITertiaryBeamConfiguration)&lt;[TPrimary](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ITertiaryBeamConfiguration#tprimary), [TSecondary](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ITertiaryBeamConfiguration#tsecondary), [TTertiary](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ITertiaryBeamConfiguration#ttertiary)&gt;
+    - BH.oM.Structure.FloorSystem.[ITimberFrameConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ITimberFrameConfiguration)
+    - BH.oM.Structure.FloorSystem.[ITimberPrimaryBeamConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ITimberPrimaryBeamConfiguration)
+    - BH.oM.Structure.FloorSystem.[ITimberSecondaryBeamConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ITimberSecondaryBeamConfiguration)&lt;[TPrimary](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ITimberSecondaryBeamConfiguration#tprimary)&gt;
+    - BH.oM.Structure.FloorSystem.[ITimberSlabConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ITimberSlabConfiguration)&lt;[T](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ITimberSlabConfiguration#t)&gt;
+    - BH.oM.Structure.FloorSystem.[ITimberTertiaryBeamFloorConfiguration](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/Interfaces/ITimberTertiaryBeamFloorConfiguration)
+    - BH.oM.Structure.FloorSystem.[IColumnConfiguration](/api/oM/Analytical/Structure/FloorSystem/IColumnConfiguration)&lt;[T](/api/oM/Analytical/Structure/FloorSystem/IColumnConfiguration#t)&gt;
+    - BH.oM.Structure.FloorSystem.[IFloorConfiguration](/api/oM/Analytical/Structure/FloorSystem/IFloorConfiguration)
     - BH.oM.Structure.Elements.[IAreaElement](/api/oM/Analytical/Structure/Elements/IAreaElement)
     - BH.oM.Structure.Elements.[IFoundation](/api/oM/Analytical/Structure/Elements/IFoundation)
     - BH.oM.Structure.Design.[IDesignable](/api/oM/Analytical/Structure/Design/IDesignable)
@@ -1544,6 +1562,36 @@ title: IObject
     - BH.oM.Structure.Fragments.[ReinforcementDensity](/api/oM/Analytical/Structure/Fragments/ReinforcementDensity)
     - BH.oM.Structure.Fragments.[SectionModifier](/api/oM/Analytical/Structure/Fragments/SectionModifier)
     - BH.oM.Structure.Fragments.[SurfacePropertyModifier](/api/oM/Analytical/Structure/Fragments/SurfacePropertyModifier)
+    - BH.oM.Structure.FloorSystem.[ConcreteColumnConfiguration](/api/oM/Analytical/Structure/FloorSystem/ColumnConfigurations/ConcreteColumnConfiguration)
+    - BH.oM.Structure.FloorSystem.[SteelColumnConfiguration](/api/oM/Analytical/Structure/FloorSystem/ColumnConfigurations/SteelColumnConfiguration)
+    - BH.oM.Structure.FloorSystem.[TimberColumnConfiguration](/api/oM/Analytical/Structure/FloorSystem/ColumnConfigurations/TimberColumnConfiguration)
+    - BH.oM.Structure.FloorSystem.[ColumnData](/api/oM/Analytical/Structure/FloorSystem/ColumnData)
+    - BH.oM.Structure.FloorSystem.[ConcreteVolumeOverride](/api/oM/Analytical/Structure/FloorSystem/Detailing/ConcreteVolumeOverride)
+    - BH.oM.Structure.FloorSystem.[Drophead](/api/oM/Analytical/Structure/FloorSystem/Detailing/Drophead)
+    - BH.oM.Structure.FloorSystem.[EstimateBeamReinforcement](/api/oM/Analytical/Structure/FloorSystem/Detailing/EstimateBeamReinforcement)
+    - BH.oM.Structure.FloorSystem.[EstimateSlabReinforcement](/api/oM/Analytical/Structure/FloorSystem/Detailing/EstimateSlabReinforcement)
+    - BH.oM.Structure.FloorSystem.[LayoutSlabReinforcement](/api/oM/Analytical/Structure/FloorSystem/Detailing/LayoutSlabReinforcement)
+    - BH.oM.Structure.FloorSystem.[CompositeSteelInfillBeams](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/CompositeSteelInfillBeams)
+    - BH.oM.Structure.FloorSystem.[InSituConcreteFrame](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/InSituConcreteFrame)
+    - BH.oM.Structure.FloorSystem.[OneWayBiscuitSlab](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/OneWayBiscuitSlab)
+    - BH.oM.Structure.FloorSystem.[OneWayHollowcoreSlab](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/OneWayHollowcoreSlab)
+    - BH.oM.Structure.FloorSystem.[OneWayRCFlatSlab](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/OneWayRCFlatSlab)
+    - BH.oM.Structure.FloorSystem.[OneWayRCRibbedSlab](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/OneWayRCRibbedSlab)
+    - BH.oM.Structure.FloorSystem.[PrecastConcreteFrameBiscuit](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/PrecastConcreteFrameBiscuit)
+    - BH.oM.Structure.FloorSystem.[PrecastConcreteFrameHollow](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/PrecastConcreteFrameHollow)
+    - BH.oM.Structure.FloorSystem.[PrecastConcreteFrameRibbed](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/PrecastConcreteFrameRibbed)
+    - BH.oM.Structure.FloorSystem.[RCFlatSlab](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/RCFlatSlab)
+    - BH.oM.Structure.FloorSystem.[RCVoidedFlatSlab](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/RCVoidedFlatSlab)
+    - BH.oM.Structure.FloorSystem.[SteelInfillBeams](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/SteelInfillBeams)
+    - BH.oM.Structure.FloorSystem.[TimberInfillBeams](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/TimberInfillBeams)
+    - BH.oM.Structure.FloorSystem.[TimberJoistFloor](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/TimberJoistFloor)
+    - BH.oM.Structure.FloorSystem.[WaffleSlab](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/WaffleSlab)
+    - BH.oM.Structure.FloorSystem.[FloorDesign](/api/oM/Analytical/Structure/FloorSystem/FloorDesign)
+    - BH.oM.Structure.FloorSystem.[PopulateOptions](/api/oM/Analytical/Structure/FloorSystem/PopulateOptions)
+    - BH.oM.Structure.FloorSystem.FloorConfigurations.[HybridConcreteOnTimber](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/HybridConcreteOnTimber)
+    - BH.oM.Structure.FloorSystem.FloorConfigurations.[HybridTimberOnConcrete](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/HybridTimberOnConcrete)
+    - BH.oM.Structure.FloorSystem.FloorConfigurations.[HybridTimberOnConcreteAndTimber](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/HybridTimberOnConcreteAndTimber)
+    - BH.oM.Structure.FloorSystem.FloorConfigurations.[HybridTimberOnSteel](/api/oM/Analytical/Structure/FloorSystem/FloorConfigurations/HybridTimberOnSteel)
     - BH.oM.Structure.Elements.[Bar](/api/oM/Analytical/Structure/Elements/Bar)
     - BH.oM.Structure.Elements.[Edge](/api/oM/Analytical/Structure/Elements/Edge)
     - BH.oM.Structure.Elements.[FEMesh](/api/oM/Analytical/Structure/Elements/FEMesh)
