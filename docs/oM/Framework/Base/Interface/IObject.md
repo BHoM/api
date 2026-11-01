@@ -835,6 +835,7 @@ title: IObject
     - BH.oM.LadybugTools.[ExternalComfort](/api/oM/Adapter/LadybugTools/Simulation/ExternalComfort)
     - BH.oM.LadybugTools.[SimulationResult](/api/oM/Adapter/LadybugTools/Simulation/SimulationResult)
     - BH.oM.LadybugTools.[Typology](/api/oM/Adapter/LadybugTools/Simulation/Typology)
+    - BH.oM.LifeCycleAssessment.[PartOfAttribute](/api/oM/Analytical/LifeCycleAssessment/Attributes/PartOfAttribute)
     - BH.oM.LifeCycleAssessment.[BuildingBenchmarkingData](/api/oM/Analytical/LifeCycleAssessment/BuildingBenchmarkingData)
     - BH.oM.LifeCycleAssessment.[LifeCycleAssessmentScope](/api/oM/Analytical/LifeCycleAssessment/Fragments/LifeCycleAssessmentScope)
     - BH.oM.LifeCycleAssessment.[Scope](/api/oM/Analytical/LifeCycleAssessment/Fragments/Scope)

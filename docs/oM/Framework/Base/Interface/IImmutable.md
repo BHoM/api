@@ -100,6 +100,7 @@ title: IImmutable
     - BH.oM.Humans.ViewQuality.[ViewQualityResult](/api/oM/Physical/Humans/ViewQuality/Results/ViewQualityResult)
     - BH.oM.LadybugTools.[ExternalComfort](/api/oM/Adapter/LadybugTools/Simulation/ExternalComfort)
     - BH.oM.LadybugTools.[SimulationResult](/api/oM/Adapter/LadybugTools/Simulation/SimulationResult)
+    - BH.oM.LifeCycleAssessment.[PartOfAttribute](/api/oM/Analytical/LifeCycleAssessment/Attributes/PartOfAttribute)
     - BH.oM.LifeCycleAssessment.Results.[AbioticDepletionFossilResourcesElementResult](/api/oM/Analytical/LifeCycleAssessment/Results/ElementResults/AbioticDepletionFossilResourcesElementResult)
     - BH.oM.LifeCycleAssessment.Results.[AbioticDepletionMineralsAndMetalsElementResult](/api/oM/Analytical/LifeCycleAssessment/Results/ElementResults/AbioticDepletionMineralsAndMetalsElementResult)
     - BH.oM.LifeCycleAssessment.Results.[AcidificationElementResult](/api/oM/Analytical/LifeCycleAssessment/Results/ElementResults/AcidificationElementResult)
